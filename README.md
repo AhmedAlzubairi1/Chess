@@ -1,4 +1,4 @@
-# COMS4995
+# Chess
 ![GitHub](https://img.shields.io/github/license/AhmedAlzubairi1/COMS4995?style=plastic)
 
 COMS4995 Project
