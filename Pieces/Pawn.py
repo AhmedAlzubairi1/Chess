@@ -6,7 +6,7 @@ class Pawn(Piece):
         print(self.row)
 
     def availableMoves(self):
-        #Returns a set of the avaiable moves the Rook can make
+        #Returns a set of the avaiable moves the Pawn can make
         moves=set()
         #Up
         # ex row=2 col=C
