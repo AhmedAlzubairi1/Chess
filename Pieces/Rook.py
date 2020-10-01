@@ -6,7 +6,6 @@ from Piece import Piece
 class Rook(Piece):
     def __init__(self,board,color,group,row,col):
         super().__init__(board,color,group,"Rook",row,col)
-        print(self.row)
 
     def availableMoves(self):
         #Returns a set of the avaiable moves the Rook can make

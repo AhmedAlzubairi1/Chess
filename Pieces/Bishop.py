@@ -3,12 +3,11 @@ from Piece import Piece
 class Pawn(Piece):
     def __init__(self,board,color,group,row,col):
         super().__init__(board,color,group,"Bishop",row,col)
-        print(self.row)
 
     def availableMoves(self):
         #Returns a set of the avaiable moves the Bishop can make
         moves=set()
-        tempRow=self.row+1
+        tempRow=self.row
         tempCol=self.possibleCol[self.col]-1
         #Top left diagonal 
         while 0<=tempCol<=7 and 0<=tempRow<=7:
@@ -22,7 +21,7 @@ class Pawn(Piece):
             tempCol-=1
 
         #Top right diagonal 
-        tempRow=self.row+1
+        tempRow=self.row
         tempCol=self.possibleCol[self.col]+1
         while 0<=tempCol<=7 and 0<=tempRow<=7:
             if self.board[tempRow][tempCol] is None:
@@ -35,7 +34,7 @@ class Pawn(Piece):
             tempCol+=1
 
         #Bottom left diagonal 
-        tempRow=self.row-1
+        tempRow=self.row-2
         tempCol=self.possibleCol[self.col]-1
         while 0<=tempCol<=7 and 0<=tempRow<=7:
             if self.board[tempRow][tempCol] is None:
@@ -48,7 +47,7 @@ class Pawn(Piece):
             tempCol-=1
 
         #Bottom right diagonal 
-        tempRow=self.row-1
+        tempRow=self.row-2
         tempCol=self.possibleCol[self.col]+1
         while 0<=tempCol<=7 and 0<=tempRow<=7:
             if self.board[tempRow][tempCol] is None:
