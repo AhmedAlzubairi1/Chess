@@ -3,7 +3,7 @@ This is a general class to describe the characteristics that every piece should 
 '''
 
 class Piece():
-    def __init__(self,board,group,name,row,col):
+    def __init__(self,board,color,group,name,row,col):
         possiblePieces={'Pawn','Rook','Knight','King','Queen','Bishop'}
         self.possibleRow={i:i-1 for i in range(1,9)}
         self.possibleCol={chr(i):i-ord('A') for i in range(ord('A'),ord('A')+8)}
@@ -11,7 +11,9 @@ class Piece():
         assert name in possiblePieces , f"Invalid pawn type. Make sure name is one of {possiblePieces}"
         assert col in self.possibleCol , f"Invalid column location, make sure it is between A and H (inclusive and uppercase)"
         assert row in self.possibleRow , f"Invalid row location, make sure it is between 1 and 8 (inclusive)"
+        assert color in ("BLACK","WHITE") , f"Invalid color for piece, make it it is either BLACK or WHITE"
         self.board=board
+        self.color=color
         self.group=group
         self.name=name
         self.row=row
@@ -20,6 +22,12 @@ class Piece():
     def availableMoves(self):
         #Returns a set of the avaiable moves the piece can make
         pass
+    def validMove(self,row,col):
+        if self.board[row][col] is None or self.board[row][col].color != self.color:
+            return True
+        return False
+
+        
 
     def checkIfNotNearKing(self,row,col):
         #TODO this should check if the location is a king or near a king. If it is, return False. Else return True
