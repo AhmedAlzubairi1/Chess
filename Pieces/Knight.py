@@ -12,8 +12,10 @@ class Pawn(Piece):
         tempRow=self.row-1
         tempCol=self.possibleCol[self.col]
         #This is the L moves direction
-        direction=[(2,-1),(2,1),(-2,-1),(-2,1), (1,-2), (-1,-2), (1,2), (-1,2)]       ]
+        direction=[(2,-1),(2,1),(-2,-1),(-2,1), (1,-2), (-1,-2), (1,2), (-1,2)]     
         for (i,k) in direction:
             if 0<=tempRow+i<=7 and 0<=tempCol+k<=7 and (self.board[tempRow+i][tempCol+k] is None or self.validMove(tempRow+i,tempCol+k)):
                 moves.add((tempRow+i,tempCol+k))            
         return moves
+
+
