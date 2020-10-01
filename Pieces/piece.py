@@ -23,15 +23,17 @@ class Piece():
         #Returns a set of the avaiable moves the piece can make
         pass
     def validMove(self,row,col):
-        if self.board[row][col] is None or self.board[row][col].color != self.color:
+        if self.board[row][col].color != self.color and self.notKing(row,col):
             return True
         return False
 
         
 
-    def checkIfNotNearKing(self,row,col):
+    def notKing(self,row,col):
         #TODO this should check if the location is a king or near a king. If it is, return False. Else return True
-        pass
+        if self.board[row][col].name != 'King':
+            return True
+        return False
     
     def move(self,targetRow,targetCol):
         #Example input : 1A for bottom left location 
@@ -55,7 +57,7 @@ class Piece():
         self.group.remove(self)
     
     def __repr__(self):
-        return f'{self.name}-{self.row}{self.col}' 
+        return f'{self.color[0]}-{self.name}-{self.row}{self.col}' 
 
 #Ignoe
 '''
