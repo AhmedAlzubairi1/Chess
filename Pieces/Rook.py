@@ -20,8 +20,7 @@ class Rook(Piece):
                     moves.add((i,tempCol))
                 break
             else:
-                if self.validMove(i,tempCol):
-                    moves.add((i,tempCol))
+                moves.add((i,tempCol))
         #Down
         tempRow=self.row-2
         tempCol=self.possibleCol[self.col]
@@ -31,8 +30,7 @@ class Rook(Piece):
                     moves.add((i,tempCol))
                 break
             else:
-                if self.validMove(i,tempCol):
-                    moves.add((i,tempCol))
+                moves.add((i,tempCol))
         #Left
         tempRow=self.row-1
         tempCol=self.possibleCol[self.col]-1
@@ -42,8 +40,7 @@ class Rook(Piece):
                     moves.add((tempRow,i))
                 break
             else:
-                if self.validMove(tempRow,i):
-                    moves.add((tempRow,i))
+                moves.add((tempRow,i))
         #Right
         tempRow=self.row-1
         tempCol=self.possibleCol[self.col]+1
@@ -53,6 +50,5 @@ class Rook(Piece):
                     moves.add((tempRow,i))
                 break
             else:
-                if self.validMove(tempRow,i):
-                    moves.add((tempRow,i))
+                moves.add((tempRow,i))
         return moves
