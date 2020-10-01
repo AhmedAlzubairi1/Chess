@@ -2,10 +2,10 @@ from Piece import Piece
 
 class Pawn(Piece):
     def __init__(self,board,color,group,row,col):
-        super().__init__(board,color,group,"Bishop",row,col)
+        super().__init__(board,color,group,"Knight",row,col)
 
     def availableMoves(self):
-        #Returns a set of the avaiable moves the Bishop can make
+        #Returns a set of the avaiable moves the Knight can make
         moves=set()
         #The knight moves in 8 different moves in 8 different L like moves
         
