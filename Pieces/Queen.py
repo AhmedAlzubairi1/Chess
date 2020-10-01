@@ -108,6 +108,6 @@ class Pawn(Piece):
     def availableMoves(self):
         #Returns a set of the avaiable moves the Queen can make
         #The Queen moves basically in the directions of the rook & bishop. So I basically choose to copy & paste
-        return self.diagonalMoves() + self.crossMoves()
+        return self.diagonalMoves() | self.crossMoves()
         
         
