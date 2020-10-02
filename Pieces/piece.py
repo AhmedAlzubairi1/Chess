@@ -18,6 +18,10 @@ class Piece():
         self.name=name
         self.row=row
         self.col=col
+        #Add to group and board
+        self.board[self.row-1][self.possibleCol[self.col]]=self
+        self.group.add(self)
+
 
     def availableMoves(self):
         #Returns a set of the avaiable moves the piece can make
@@ -39,22 +43,32 @@ class Piece():
         #Example input : 1A for bottom left location 
         if (targetRow-1,self.possibleCol[targetCol]) in self.availableMoves():
             #Check if there is already a piece there. If so, remove it and replace
-            if self.board[targetRow-1,self.possibleCol[targetCol]] is not None:
-                self.board[targetRow-1,self.possibleCol[targetCol]].removeFromGroup()
+            if self.board[targetRow-1][self.possibleCol[targetCol]] is not None:
+                print("if")
+                self.board[targetRow-1][self.possibleCol[targetCol]].removeFromGroup()
+                self.board[targetRow-1][self.possibleCol[targetCol]]=self
+                self.board[self.row-1][self.possibleCol[self.col]]=None
                 self.row=targetRow
                 self.col=targetCol
-                self.board[targetRow-1,self.possibleCol[targetCol]]=self
             else:
+                print("else")
                 #Else, just move it to that location
+                self.board[targetRow-1][self.possibleCol[targetCol]]=self
+                self.board[self.row-1][self.possibleCol[self.col]]=None
                 self.row=targetRow
                 self.col=targetCol
-                self.board[targetRow-1,self.possibleCol[targetCol]]=self
         else:
+            print("error FALSE MOVE")
             return False
 
     def removeFromGroup(self):
         #This removes the piece from the current player's set
         self.group.remove(self)
+    
+    def __hash__(self):
+        return hash((self.name,self.row,self.col))
+    def __eq__(self,other):
+        return type(other) == type(self) and self.name == other.name and self.col==other.col and self.row==other.row
     
     def __repr__(self):
         return f'{self.color[0]}-{self.name}-{self.row}{self.col}' 

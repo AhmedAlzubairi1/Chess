@@ -1,6 +1,6 @@
 from Piece import Piece
 
-class Pawn(Piece):
+class King(Piece):
     def __init__(self,board,color,group,row,col):
         super().__init__(board,color,group,"King",row,col)
 
