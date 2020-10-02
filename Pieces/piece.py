@@ -43,17 +43,22 @@ class Piece():
         #Example input : 1A for bottom left location 
         if (targetRow-1,self.possibleCol[targetCol]) in self.availableMoves():
             #Check if there is already a piece there. If so, remove it and replace
-            if self.board[targetRow-1,self.possibleCol[targetCol]] is not None:
-                self.board[targetRow-1,self.possibleCol[targetCol]].removeFromGroup()
+            if self.board[targetRow-1][self.possibleCol[targetCol]] is not None:
+                print("if")
+                self.board[targetRow-1][self.possibleCol[targetCol]].removeFromGroup()
+                self.board[targetRow-1][self.possibleCol[targetCol]]=self
+                self.board[self.row-1][self.possibleCol[self.col]]=None
                 self.row=targetRow
                 self.col=targetCol
-                self.board[targetRow-1,self.possibleCol[targetCol]]=self
             else:
+                print("else")
                 #Else, just move it to that location
+                self.board[targetRow-1][self.possibleCol[targetCol]]=self
+                self.board[self.row-1][self.possibleCol[self.col]]=None
                 self.row=targetRow
                 self.col=targetCol
-                self.board[targetRow-1,self.possibleCol[targetCol]]=self
         else:
+            print("error FALSE MOVE")
             return False
 
     def removeFromGroup(self):

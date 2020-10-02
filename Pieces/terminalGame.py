@@ -37,5 +37,15 @@ if __name__ == "__main__":
     playerTwoPieces=set()
     board=[[None]*8 for i in range(8)]
     initGame(playerOnePieces,playerTwoPieces,board)
-    printBoard(board)
+    possibleRow={i:i-1 for i in range(1,9)}
+    possibleCol={chr(i):i-ord('A') for i in range(ord('A'),ord('A')+8)}
+
+    while True:
+        printBoard(board)
+        print("Player One Put your move ex) 1A to 3B is how you move something")
+        x=input().split()
+        moveOne=x[0]
+        moveTwo=x[2]
+        board[possibleRow[int(moveOne[0])]][possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
+        
     
