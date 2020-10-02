@@ -1,4 +1,4 @@
-from Piece import *
+from Piece import Piece
 
 class Bishop(Piece):
     def __init__(self,board,color,group,row,col):
