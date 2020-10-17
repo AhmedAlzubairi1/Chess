@@ -1,7 +1,7 @@
 '''
 This is a class to represent the Rook
 '''
-from piece import Piece
+from .piece import Piece
 
 class Rook(Piece):
     def __init__(self,board,color,group,row,col):
