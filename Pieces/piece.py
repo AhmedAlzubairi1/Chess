@@ -30,6 +30,7 @@ class Piece():
         #Returns a set of the avaiable moves the piece can make
         pass
     def validMove(self,row,col):
+        print(f'valid move requested row,col is {(row,col)} and that color is {self.board[row][col].color} and our color is {self.color}')
         if self.board[row][col].color != self.color and self.notKing(row,col):
             return True
         return False
