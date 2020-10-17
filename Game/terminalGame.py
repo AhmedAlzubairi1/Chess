@@ -1,11 +1,7 @@
-print(101)
-import sys
-import os
-#from Pieces.piece import Piece
-print(102)
-#sys.path.insert(1, '../')
-
-from .. Pieces.Bishop import Bishop
+from sys import path
+from os.path import dirname as dir
+path.append(dir(path[0]))
+from  Pieces.Bishop import Bishop
 from Pieces.King import King
 from Pieces.Knight import Knight
 from Pieces.Pawn import Pawn
