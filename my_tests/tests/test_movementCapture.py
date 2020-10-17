@@ -1,14 +1,13 @@
 from sys import path
 from os.path import dirname as dir
 path.append(dir(path[0])[0:dir(path[0]).rfind('\\')])
-# I did this to make sure it is appending c:\Users\Ahmed Alzubairi\Documents\Open Source\COMS4995
-
 from  Pieces.Bishop import Bishop
 from Pieces.King import King
 from Pieces.Knight import Knight
 from Pieces.Pawn import Pawn
 from Pieces.Queen import Queen
 from Pieces.Rook import Rook
+# Make sure to appending c:\Users\Ahmed Alzubairi\Documents\Open Source\COMS4995
 
 def test_pawn_move():
     playerOnePieces=set()
