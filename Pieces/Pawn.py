@@ -24,5 +24,5 @@ class Pawn(Piece):
             moves.add((tempRow+1,tempCol-1))
         if 0<=tempRow+1<=7 and 0<=tempCol+1<=7 and self.validMove(tempRow,tempCol):
             moves.add((tempRow+1,tempCol+1))
-
+        
         return moves
