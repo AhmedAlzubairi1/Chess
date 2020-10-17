@@ -1,4 +1,4 @@
-from Piece import Piece
+from piece import Piece
 
 class Pawn(Piece):
     def __init__(self,board,color,group,row,col):
@@ -18,11 +18,13 @@ class Pawn(Piece):
         #if at second col
         if tempRow==1 and self.board[tempRow+1][tempCol] is None and self.board[tempRow+2][tempCol] is None:
             moves.add((tempRow+2,tempCol))
+            
+        print((0<=tempRow+1<=7,0<=tempCol+1<=7,self.validMove(tempRow,tempCol)))
 
         #Now the capture moves
-        if 0<=tempRow+1<=7 and 0<=tempCol-1<=7 and self.validMove(tempRow,tempCol):
+        if 0<=tempRow+1<=7 and 0<=tempCol-1<=7 and self.board[tempRow+1][tempCol-1] is not None and self.validMove(tempRow+1,tempCol-1):
             moves.add((tempRow+1,tempCol-1))
-        if 0<=tempRow+1<=7 and 0<=tempCol+1<=7 and self.validMove(tempRow,tempCol):
+        if 0<=tempRow+1<=7 and 0<=tempCol+1<=7 and self.board[tempRow+1][tempCol+1] is not None and self.validMove(tempRow+1,tempCol+1):
             moves.add((tempRow+1,tempCol+1))
-        
+
         return moves
