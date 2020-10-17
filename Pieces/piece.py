@@ -18,6 +18,9 @@ class Piece():
         self.name=name
         self.row=row
         self.col=col
+        #I add an original col & row for hash and equal purposes
+        self.origRow=row
+        self.origCol=col
         #Add to group and board
         self.board[self.row-1][self.possibleCol[self.col]]=self
         self.group.add(self)
@@ -59,16 +62,23 @@ class Piece():
                 self.col=targetCol
         else:
             print("error FALSE MOVE")
+            print(f' requested {targetRow,targetCol} but available moves are {self.availableMoves()} ALSO {len(self.availableMoves())==0}')
+            print(self.__repr__())
             return False
 
     def removeFromGroup(self):
         #This removes the piece from the current player's set
+        print('test')
+        print(self.group)
+        print(self)
+        print(self in self.group)
+        print('test')
         self.group.remove(self)
     
     def __hash__(self):
-        return hash((self.name,self.row,self.col))
+        return hash((self.name,self.origRow,self.origCol))
     def __eq__(self,other):
-        return type(other) == type(self) and self.name == other.name and self.col==other.col and self.row==other.row
+        return type(other) == type(self) and self.name == other.name and self.origCol==other.origCol and self.origRow==other.origRow
     
     def __repr__(self):
         return f'{self.color[0]}-{self.name}-{self.row}{self.col}' 
