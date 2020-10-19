@@ -11,7 +11,7 @@ script:
   - python3.7 -m pytest -vvv my_tests/ --cov my_tests
 
 after_success:
-  -codecov
+  - codecov
   
 branches:
   only:
