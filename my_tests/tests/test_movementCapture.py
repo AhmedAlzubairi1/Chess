@@ -140,6 +140,7 @@ def test_knight_move():
 
 
 def test_knight_capture():
+    #Ignore this comment
     playerOnePieces = set()
     playerTwoPieces = set()
     board = [[None] * 8 for i in range(8)]
