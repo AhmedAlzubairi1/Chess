@@ -9,6 +9,8 @@ install:
 script:
   - python3.7 -m flake8 my_tests/
   - python3.7 -m pytest -vvv my_tests/ --cov my_tests
+  - python3.7 --cov Game
+  - python3.7 --cov Pieces
 
 after_success:
   - codecov
