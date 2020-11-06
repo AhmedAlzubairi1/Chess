@@ -59,18 +59,20 @@ class Game():
         temp=[chr(ord('A')+i) for i in range(8)]
         return temp
         '''
-        # COde found @ https://stackoverflow.com/questions/13214809/pretty-print-2d-python-list
 
-        tempBoard=[[k for k in i] for i in self.board]
+        tempBoard=[[k for k in i] for i in self.board]        
         #Add column labeling
         columnLetters = [chr(ord('A')+i)       for i in range(8)]
+        columnLetters.insert(0,'_')
         tempBoard.insert(0,columnLetters)
+        
         #add row labeling
         count=1
         for i in range(1,len(tempBoard)):
             tempBoard[i].insert(0,count)
             count+=1
         #Format board display
+        # COde found @ https://stackoverflow.com/questions/13214809/pretty-print-2d-python-list
         s = [[str(e) for e in row] for row in tempBoard]
         lens = [max(map(len, col)) for col in zip(*s)]
         fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
