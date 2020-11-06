@@ -3,7 +3,7 @@ This is a general class to describe the characteristics that every piece should 
 '''
 
 class Piece():
-    def __init__(self,board,color,group,name,row,col):
+    def __init__(self,board,color,group,name,row,col,game):
         """This is an init for any piece. It creates the piece. It should be inherited by a specific piece with custom parameters.
 
         :param board: A 2d list representing a board state
@@ -20,6 +20,7 @@ class Piece():
         :type col: str
         """
         possiblePieces={'Pawn','Rook','Knight','King','Queen','Bishop'}
+        self.game=game
         self.possibleRow={i:i-1 for i in range(1,9)}
         self.possibleCol={chr(i):i-ord('A') for i in range(ord('A'),ord('A')+8)}
         #Check they are valid
@@ -39,6 +40,8 @@ class Piece():
         #Add to group and board
         self.board[self.row-1][self.possibleCol[self.col]]=self
         self.group.add(self)
+        #added hasMoved variable for the en passant and castling rules
+        self.hasMoved=False
 
 
     def availableMoves(self):
@@ -105,6 +108,10 @@ class Piece():
                 self.board[self.row-1][self.possibleCol[self.col]]=None
                 self.row=targetRow
                 self.col=targetCol
+            self.hasMoved=True
+            self.game.turn[0]+=1
+            print(self.game.turn[0])
+            
         else:
             print("error FALSE MOVE")
             print(f' requested {targetRow,targetCol} but available moves are {self.availableMoves()} ALSO {len(self.availableMoves())==0}')

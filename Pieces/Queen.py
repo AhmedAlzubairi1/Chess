@@ -1,7 +1,7 @@
 from .piece import Piece
 
 class Queen(Piece):
-    def __init__(self,board,color,group,row,col):
+    def __init__(self,board,color,group,row,col,game):
         """This is an init for a queen piece. It creates the piece
 
         :param board: A 2d list representing a board state
@@ -15,7 +15,7 @@ class Queen(Piece):
         :param col: a letter from 'A' to 'H' representing the col of the piece
         :type col: str
         """
-        super().__init__(board,color,group,"Queen",row,col)
+        super().__init__(board,color,group,"Queen",row,col,game)
 
     def diagonalMoves(self):
         """Returns the possible diagonal moves the queen can make

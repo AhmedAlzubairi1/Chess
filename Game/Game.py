@@ -15,7 +15,7 @@ class Game():
         self.initGame()
         self.possibleRow={i:i-1 for i in range(1,9)}
         self.possibleCol={chr(i):i-ord('A') for i in range(ord('A'),ord('A')+8)}
-
+        self.turn=[1]
     def initPlayerOne(self,):
         """This populates the playerOnePieces (black) empty set with the player one's pieces. It also adds those pieces to the board
         """    
@@ -23,19 +23,19 @@ class Game():
         #(self,self.board,color,group,row,col)
         color="BLACK"
         group=self.playerOnePieces
-        self.playerOnePieces.update({Pawn(self.board,color,group,2,'A'),Pawn(self.board,color,group,2,'B'),Pawn(self.board,color,group,2,'C'),Pawn(self.board,color,group,2,'D'),Pawn(self.board,color,group,2,'E'),Pawn(self.board,color,group,2,'F'),Pawn(self.board,color,group,2,'G'),Pawn(self.board,color,group,2,'H')})
+        self.playerOnePieces.update({Pawn(self.board,color,group,2,'A',self),Pawn(self.board,color,group,2,'B',self),Pawn(self.board,color,group,2,'C',self),Pawn(self.board,color,group,2,'D',self),Pawn(self.board,color,group,2,'E',self),Pawn(self.board,color,group,2,'F',self),Pawn(self.board,color,group,2,'G',self),Pawn(self.board,color,group,2,'H',self)})
 
         #Add rank 1 pieces
-        self.playerOnePieces.update({Rook(self.board,color,group,1,'A'),Knight(self.board,color,group,1,'B'),Bishop(self.board,color,group,1,'C'),Queen(self.board,color,group,1,'D'),King(self.board,color,group,1,'E'),Bishop(self.board,color,group,1,'F'),Knight(self.board,color,group,1,'G'),Rook(self.board,color,group,1,'H')})
+        self.playerOnePieces.update({Rook(self.board,color,group,1,'A',self),Knight(self.board,color,group,1,'B',self),Bishop(self.board,color,group,1,'C',self),Queen(self.board,color,group,1,'D',self),King(self.board,color,group,1,'E',self),Bishop(self.board,color,group,1,'F',self),Knight(self.board,color,group,1,'G',self),Rook(self.board,color,group,1,'H',self)})
         
     def initPlayerTwo(self):
         """This populates the playerTwoPieces (white) empty set with the player two's pieces. It also adds those pieces to the board
         """
         color="WHITE"
         group=self.playerTwoPieces
-        self.playerTwoPieces.update({Pawn(self.board,color,group,7,'A'),Pawn(self.board,color,group,7,'B'),Pawn(self.board,color,group,7,'C'),Pawn(self.board,color,group,7,'D'),Pawn(self.board,color,group,7,'E'),Pawn(self.board,color,group,7,'F'),Pawn(self.board,color,group,7,'G'),Pawn(self.board,color,group,7,'H')})
+        self.playerTwoPieces.update({Pawn(self.board,color,group,7,'A',self),Pawn(self.board,color,group,7,'B',self),Pawn(self.board,color,group,7,'C',self),Pawn(self.board,color,group,7,'D',self),Pawn(self.board,color,group,7,'E',self),Pawn(self.board,color,group,7,'F',self),Pawn(self.board,color,group,7,'G',self),Pawn(self.board,color,group,7,'H',self)})
         #Add rank 1 pieces
-        self.playerTwoPieces.update({Rook(self.board,color,group,8,'A'),Knight(self.board,color,group,8,'B'),Bishop(self.board,color,group,8,'C'),Queen(self.board,color,group,8,'D'),King(self.board,color,group,8,'E'),Bishop(self.board,color,group,8,'F'),Knight(self.board,color,group,8,'G'),Rook(self.board,color,group,8,'H')})
+        self.playerTwoPieces.update({Rook(self.board,color,group,8,'A',self),Knight(self.board,color,group,8,'B',self),Bishop(self.board,color,group,8,'C',self),Queen(self.board,color,group,8,'D',self),King(self.board,color,group,8,'E',self),Bishop(self.board,color,group,8,'F',self),Knight(self.board,color,group,8,'G',self),Rook(self.board,color,group,8,'H',self)})
 
     def initGame(self):
         """Given a set reprenting player one's peices, a set w/ player two peices, and a 8 by 8 2d list filled with Nones, this mehtod would autopopulated the sets
