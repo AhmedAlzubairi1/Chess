@@ -107,8 +107,22 @@ class Game():
                     raise Exception("Can't do castle, spaces for king move are occupied or you are missing a rook")
         else:
             #This means playe is white
-            pass
-        raise Exception('Cant do Queen Castle')
+            if self.playerTwoKing.hasMoved:
+                raise Exception("Can't Do castle anymore, King has moved")
+            else:
+                if self.board[7][1] is None and self.board[7][2] is None and self.board[7][3] is None and self.board[7][0] is not None and self.board[7][0].name=='Rook' and self.board[7][0].color=='WHITE':
+                    #this means I can do castle
+                    self.board[7][2]=self.playerOneKing
+                    self.board[self.playerOneKing.row-1][self.possibleCol[self.playerOneKing.col]]=None
+                    self.playerOneKing.row=7
+                    self.playerOneKing.col='C'
+                    self.board[7][0].row=7
+                    self.board[7][0].col='D'
+                    self.board[7][3]=self.board[7][0]
+                    self.board[7][0]=None
+                      
+                else:
+                    raise Exception("Can't do castle, spaces for king move are occupied or you are missing a rook")
 
     def startGame(self):
         """This function when run on terminal would allow the user to play chess via terminal.
