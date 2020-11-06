@@ -67,7 +67,7 @@ class Game():
         tempBoard.insert(0,columnLetters)
         #add row labeling
         count=1
-        for i in range(len(tempBoard)):
+        for i in range(1,len(tempBoard)):
             tempBoard[i].insert(0,count)
             count+=1
         #Format board display

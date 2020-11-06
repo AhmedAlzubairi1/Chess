@@ -123,7 +123,8 @@ class Pawn(Piece):
                     self.board[targetRow-2][self.possibleCol[targetCol]].removeFromGroup()
                     self.board[targetRow-2][self.possibleCol[targetCol]]=None
 
-                elif self.color == 'WHITE' and self.board[targetRow][self.possibleCol[targetCol]] in self.game.playerTwoPassantPawns:
+                elif self.color == 'WHITE' and self.board[targetRow][self.possibleCol[targetCol]] in self.game.playerOnePassantPawns:
+                    print('in white en passant captured')
                     self.board[targetRow][self.possibleCol[targetCol]].removeFromGroup()
                     self.board[targetRow][self.possibleCol[targetCol]]=None   
 
