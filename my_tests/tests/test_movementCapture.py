@@ -12,6 +12,8 @@ path.append(dir(path[0])[0:dir(path[0]).rfind('\\')])
 
 
 def test_pawn_move():
+    """Tests if the pawn can move
+    """
     playerOnePieces = set()
     board = [[None] * 8 for i in range(8)]
     color = "BLACK"
@@ -29,6 +31,8 @@ def test_pawn_move():
 
 
 def test_pawn_capture():
+    """Tests if pawn can capture
+    """
     playerOnePieces = set()
     playerTwoPieces = set()
     board = [[None] * 8 for i in range(8)]
@@ -49,6 +53,8 @@ def test_pawn_capture():
 
 
 def test_bishop_move():
+    """Tests if bishop can move
+    """
     playerOnePieces = set()
     board = [[None] * 8 for i in range(8)]
     color = "BLACK"
@@ -66,6 +72,8 @@ def test_bishop_move():
 
 
 def test_bishop_capture():
+    """Tests if bishop can capture
+    """
     playerOnePieces = set()
     playerTwoPieces = set()
     board = [[None] * 8 for i in range(8)]
@@ -86,6 +94,8 @@ def test_bishop_capture():
 
 
 def test_rook_move():
+    """Tests if rook can move
+    """
     playerOnePieces = set()
     board = [[None] * 8 for i in range(8)]
     color = "BLACK"
@@ -103,6 +113,8 @@ def test_rook_move():
 
 
 def test_rook_capture():
+    """Tests if rook can capture
+    """
     playerOnePieces = set()
     playerTwoPieces = set()
     board = [[None] * 8 for i in range(8)]
@@ -123,6 +135,8 @@ def test_rook_capture():
 
 
 def test_knight_move():
+    """Tests if the knight can move
+    """
     playerOnePieces = set()
     board = [[None] * 8 for i in range(8)]
     color = "BLACK"
@@ -140,6 +154,8 @@ def test_knight_move():
 
 
 def test_knight_capture():
+    """Tests if the knight can capture
+    """
     playerOnePieces = set()
     playerTwoPieces = set()
     board = [[None] * 8 for i in range(8)]
@@ -160,6 +176,8 @@ def test_knight_capture():
 
 
 def test_queen_move():
+    """Tests if the queen can move
+    """
     playerOnePieces = set()
     board = [[None] * 8 for i in range(8)]
     color = "BLACK"
@@ -182,6 +200,8 @@ def test_queen_move():
 
 
 def test_queen_capture():
+    """Tests if the queen can capture
+    """
     playerOnePieces = set()
     playerTwoPieces = set()
     board = [[None] * 8 for i in range(8)]
@@ -208,6 +228,8 @@ def test_queen_capture():
 
 
 def test_king_move():
+    """Tests if the king can move
+    """
     playerOnePieces = set()
     board = [[None] * 8 for i in range(8)]
     color = "BLACK"
@@ -230,6 +252,8 @@ def test_king_move():
 
 
 def test_king_capture():
+    """Tests if the king can capture
+    """
     playerOnePieces = set()
     playerTwoPieces = set()
     board = [[None] * 8 for i in range(8)]
