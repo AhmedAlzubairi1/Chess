@@ -1,7 +1,7 @@
 from .piece import Piece
 
 class Bishop(Piece):
-    def __init__(self,board,color,group,row,col):
+    def __init__(self,board,color,group,row,col,game):
         """This is an init for a bishop piece. It creates the piece
 
         :param board: A 2d list representing a board state
@@ -15,7 +15,7 @@ class Bishop(Piece):
         :param col: a letter from 'A' to 'H' representing the col of the piece
         :type col: str
         """
-        super().__init__(board,color,group,"Bishop",row,col)
+        super().__init__(board,color,group,"Bishop",row,col,game)
 
     def availableMoves(self):
         """Returns a set of the avaiable moves the Bishop can make
