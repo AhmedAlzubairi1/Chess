@@ -7,6 +7,8 @@ from Pieces.Knight import Knight
 from Pieces.Pawn import Pawn
 from Pieces.Queen import Queen
 from Pieces.Rook import Rook
+from prettytable import PrettyTable
+
 class Game():
     def __init__(self):
         self.playerOnePieces=set()
@@ -49,12 +51,20 @@ class Game():
     def __repr__(self):
         """Given a 2d list representing the self.board w/ pieces. This function returns a user friendly string depicting the board. The board is already provided because it is a member variable.
         """
+        '''
         count=1
         for row in self.board:
             print(f'{count}-{row}')
             count+=1
         temp=[chr(ord('A')+i) for i in range(8)]
         return temp
+        '''
+        # COde found @ https://stackoverflow.com/questions/13214809/pretty-print-2d-python-list
+        s = [[str(e) for e in row] for row in self.board]
+        lens = [max(map(len, col)) for col in zip(*s)]
+        fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
+        table = [fmt.format(*row) for row in s]
+        return '\n'.join(table)
 
     def startGame(self):
         """This function when run on terminal would allow the user to play chess via terminal.
