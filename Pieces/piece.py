@@ -80,7 +80,10 @@ class Piece():
         if self.board[row][col].name != 'King':
             return True
         return False
-    
+    def isPassant(self,targetRow,targetCol):
+        if self.name == 'Pawn' and self.hasMoved == False and self.col == targetCol and abs(self.row-targetRow)==2:
+            return True
+        return False
     def move(self,targetRow,targetCol):
         """Given a row and column, the piece moves to that location.
 
@@ -108,8 +111,16 @@ class Piece():
                 self.board[self.row-1][self.possibleCol[self.col]]=None
                 self.row=targetRow
                 self.col=targetCol
+            #Here I check if it is a candidate for a passant move first before I label hasMoved as true
+            if self.isPassant(targetRow,targetCol):
+                #add it to passant set
+                if self.color == 'BLACK':
+                    self.game.playerOnePassantPawns.add(self)
+                else:
+                    self.game.playerTwoPassantPawns.add(self)
             self.hasMoved=True
             self.game.turn[0]+=1
+            
             print(self.game.turn[0])
             
         else:

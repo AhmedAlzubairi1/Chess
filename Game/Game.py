@@ -16,6 +16,9 @@ class Game():
         self.possibleRow={i:i-1 for i in range(1,9)}
         self.possibleCol={chr(i):i-ord('A') for i in range(ord('A'),ord('A')+8)}
         self.turn=[1]
+        self.playerOnePassantPawns=set()
+        self.playerTwoPassantPawns=set()
+        self.playerOneTurn=True
     def initPlayerOne(self,):
         """This populates the playerOnePieces (black) empty set with the player one's pieces. It also adds those pieces to the board
         """    
@@ -58,9 +61,15 @@ class Game():
         """
 
         while True:
+            # I am reseting the passant set because the opposing player can only take the passant piece on the first move it is possible to capture it only
+            if self.playerOneTurn:
+                self.playerOnePassantPawns=set()
+            else:
+                self.playerTwoPassantPawns=set()
             print(self.__repr__())
             print("Player One Put your move ex) 1A to 3B is how you move something")
             x=input().split()
             moveOne=x[0]
             moveTwo=x[2]
             self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
+            self.playerOneTurn= not self.playerOneTurn
