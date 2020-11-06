@@ -1,3 +1,7 @@
+'''
+NO LONGER SHOULD USE THIS CLASS, MAKE SURE TO DELETE BEFORE RELEASING VERSION 1
+'''
+
 from sys import path
 from os.path import dirname as dir
 path.append(dir(path[0]))
