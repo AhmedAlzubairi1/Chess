@@ -63,8 +63,10 @@ class Game():
         while True:
             # I am reseting the passant set because the opposing player can only take the passant piece on the first move it is possible to capture it only
             if self.playerOneTurn:
+                print(f' player TWO passant are {self.playerTwoPassantPawns}')
                 self.playerOnePassantPawns=set()
             else:
+                print(f' player one passant are {self.playerOnePassantPawns}')
                 self.playerTwoPassantPawns=set()
             print(self.__repr__())
             print("Player One Put your move ex) 1A to 3B is how you move something")
@@ -73,3 +75,5 @@ class Game():
             moveTwo=x[2]
             self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
             self.playerOneTurn= not self.playerOneTurn
+            print('\n'*4)
+
