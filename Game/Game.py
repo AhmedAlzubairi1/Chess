@@ -21,6 +21,11 @@ class Game():
         self.playerOnePassantPawns=set()
         self.playerTwoPassantPawns=set()
         self.playerOneTurn=True
+        self.gameEnd=False
+        self.playerOneWon=False
+        self.playerTwoWon=False
+        self.playerOneChecks=set()
+        self.playerTwoChecks=set()
     def initPlayerOne(self,):
         """This populates the playerOnePieces (black) empty set with the player one's pieces. It also adds those pieces to the board
         """    
