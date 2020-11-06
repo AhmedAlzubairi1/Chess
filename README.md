@@ -2,6 +2,8 @@
 ![GitHub](https://img.shields.io/github/license/AhmedAlzubairi1/COMS4995?style=plastic)
 [![Build Status](https://travis-ci.org/AhmedAlzubairi1/Chess.svg?branch=master)](https://travis-ci.org/AhmedAlzubairi1/Chess)
 ![Codecov](https://img.shields.io/codecov/c/github/AhmedAlzubairi1/Chess)
+[![Docs](https://img.shields.io/readthedocs/chess.svg)](https://chess1.readthedocs.io)
+
 COMS4995 Project
 
 I am making a chess game backend with a terminal as the output. User can emplement their own front-end and UI. 
