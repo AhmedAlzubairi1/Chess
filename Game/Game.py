@@ -79,8 +79,51 @@ class Game():
         fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
         table = [fmt.format(*row) for row in s]
         return '\n'.join(table)
+    def attemptKingCastle(self,playerOne):
+        """ This method is called if player wants to do a king side castle
 
-    def attempQueenCastle(self,playerOne):
+        :param playerOne: Boolean representing if it is playerOne's attempt
+        :type playerOne: bool
+        :raises Exception: raises Exception if you can't do a castle
+        """
+        if playerOne:
+            #This means black
+            if self.playerOneKing.hasMoved:
+                raise Exception("Can't Do castle anymore, King has moved")
+            else:
+                if self.board[0][5] is None and self.board[0][6] is None and self.board[0][7] is not None and self.board[0][7].name=='Rook' and self.board[0][7].color=='BLACK':
+                    #this means I can do castle
+                    self.board[0][6]=self.playerOneKing
+                    self.board[self.playerOneKing.row-1][self.possibleCol[self.playerOneKing.col]]=None
+                    self.playerOneKing.row=1
+                    self.playerOneKing.col='G'
+                    self.board[0][7].row=1
+                    self.board[0][7].col='F'
+                    self.board[0][5]=self.board[0][7]
+                    self.board[0][7]=None
+                      
+                else:
+                    raise Exception("Can't do castle, spaces for king move are occupied or you are missing a rook")
+        else:
+            #This means playe is white
+            if self.playerTwoKing.hasMoved:
+                raise Exception("Can't Do castle anymore, King has moved")
+            else:
+                if self.board[7][5] is None and self.board[7][6] is None and self.board[7][7] is not None and self.board[7][7].name=='Rook' and self.board[7][7].color=='WHITE':
+                    #this means I can do castle
+                    self.board[7][6]=self.playerTwoKing
+                    self.board[self.playerTwoKing.row-1][self.possibleCol[self.playerTwoKing.col]]=None
+                    self.playerTwoKing.row=8
+                    self.playerTwoKing.col='G'
+                    self.board[7][7].row=8
+                    self.board[7][7].col='F'
+                    self.board[7][5]=self.board[7][7]
+                    self.board[7][7]=None
+                      
+                else:
+                    raise Exception("Can't do castle, spaces for king move are occupied or you are missing a rook")
+
+    def attemptQueenCastle(self,playerOne):
         """ This method is called if player wants to do a queen side castle
 
         :param playerOne: Boolean representing if it is playerOne's attempt
@@ -112,11 +155,11 @@ class Game():
             else:
                 if self.board[7][1] is None and self.board[7][2] is None and self.board[7][3] is None and self.board[7][0] is not None and self.board[7][0].name=='Rook' and self.board[7][0].color=='WHITE':
                     #this means I can do castle
-                    self.board[7][2]=self.playerOneKing
-                    self.board[self.playerOneKing.row-1][self.possibleCol[self.playerOneKing.col]]=None
-                    self.playerOneKing.row=7
-                    self.playerOneKing.col='C'
-                    self.board[7][0].row=7
+                    self.board[7][2]=self.playerTwoKing
+                    self.board[self.playerTwoKing.row-1][self.possibleCol[self.playerTwoKing.col]]=None
+                    self.playerTwoKing.row=8
+                    self.playerTwoKing.col='C'
+                    self.board[7][0].row=8
                     self.board[7][0].col='D'
                     self.board[7][3]=self.board[7][0]
                     self.board[7][0]=None
@@ -146,7 +189,7 @@ class Game():
                 if moveOne.lower()=='king-side':
                     self.attemptKingCastle(self.playerOneTurn)
                 elif moveOne.lower()=='queen-side':
-                    self.attempQueenCastle(self.playerOneTurn)
+                    self.attemptQueenCastle(self.playerOneTurn)
                 else:
                     self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
                 self.playerOneTurn= not self.playerOneTurn
