@@ -11,7 +11,7 @@ This is repo for a chess backend that you can use for your chess game. All you n
 
 
 To run the sample terminal front end of the game do : 
-python Game/terminalGame.py
+python Game/gameRunner.py
 
 When playing the game. This is how you move a piece:
 If you want to move a piece at 1A to 3B, just type : 1A to 3B
