@@ -76,7 +76,20 @@ class Game():
                 if len(self.checkBoard[c][r])==0:
                     status=False
             return status
-
+    def isCheck(self,playerOne):
+        #Check if player is checked
+        kingCol,kingRow=0,0
+        if playerOne:
+            kingCol=self.playerOneKing.possibleCol[self.playerOneKing.col]
+            kingRow=self.playerOneKing.row-1
+        else:
+            kingCol=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
+            kingRow=self.playerTwoKing.row-1
+            
+        if len(self.checkBoard[kingCol][kingRow])!=0:
+            return True
+        else:
+            return False
 
             
 
