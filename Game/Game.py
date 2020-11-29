@@ -8,12 +8,15 @@ from Pieces.Pawn import Pawn
 from Pieces.Queen import Queen
 from Pieces.Rook import Rook
 from prettytable import PrettyTable
+from copy import deepcopy
 
 class Game():
     def __init__(self):
         self.playerOnePieces=set()
         self.playerTwoPieces=set()
         self.board=[[None]*8 for i in range(8)]
+        #3d board for all possible captures
+        self.checkBoard= [[[0 for k in range(0)] for j in range(8)] for i in range(8)]
         self.initGame()
         self.possibleRow={i:i-1 for i in range(1,9)}
         self.possibleCol={chr(i):i-ord('A') for i in range(ord('A'),ord('A')+8)}
@@ -21,6 +24,82 @@ class Game():
         self.playerOnePassantPawns=set()
         self.playerTwoPassantPawns=set()
         self.playerOneTurn=True
+        #these 5 are added from check
+        # Should be iether 1 or 2 to denote who won
+        self.gameEnd=0
+    def resetCheckBoard(self):
+        """This resets the checkBoard by making all the positions None
+        """
+        for i in range(len(self.checkBoard)):
+            for k in range(len(self.checkBoard[i])):
+                self.checkBoard[i][k]=[]
+    def updateCheckBoard(self,playerOne):
+        """ This updated the checkBoard with PlayerTwo checks on PlayerOne if the playerOne paramter is true, and opposite if false
+        
+        :param playerOne: Boolean representing if it is playerOne's check
+        :type playerOne: bool
+        """
+   
+        #This should update with moves of playerOne
+        self.resetCheckBoard()
+        playerPieces= self.playerTwoPieces if playerOne else self.playerOnePieces
+        for piece in playerPieces:
+            #Here piece is the objects
+            #print(piece)
+            #print(piece.possibleCapturesCheck())
+            #raise Exception
+            for capture in piece.possibleCapturesCheck():
+                c,r=capture
+                self.checkBoard[c][r].append(piece)
+    def isCheckMate(self,playerOne):
+        #Check if player is checkmated
+        if playerOne:
+            #For some reason doing a flip of row and col for checkMate and works
+            kingRow=self.playerOneKing.possibleCol[self.playerOneKing.col]
+            kingCol=self.playerOneKing.row-1
+            status=True
+            #print(f'***************** -{self.playerOneKing.availableMoves(),len(self.checkBoard[kingCol][kingRow]),kingCol,kingRow} -***********')
+            #Check if king cant make a move, but still also cant be captured
+            if len(self.playerOneKing.availableMoves())==0 and len(self.checkBoard[kingCol][kingRow])==0:
+                return False
+            #Now check if the king can still move, if it can, player isnt on checkmate
+            for c,r in self.playerOneKing.availableMoves():
+                if len(self.checkBoard[c][r])==0:
+                    status=False
+            return status
+        else:
+            kingRow=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
+            kingCol=self.playerTwoKing.row-1
+            # Example for col,row is E,8 OR 4, 7
+            status=True
+            #print(f'***************** -{self.playerTwoKing.availableMoves(),len(self.checkBoard[kingCol][kingRow]),kingCol,kingRow} -***********')
+            #Check if king cant make a move, but still also cant be captured
+            if len(self.playerTwoKing.availableMoves())==0 and len(self.checkBoard[kingCol][kingRow])==0:
+                return False
+            #Now check if the king can still move, if it can, player isnt on checkmate
+            for c,r in self.playerTwoKing.availableMoves():
+                if len(self.checkBoard[c][r])==0:
+                    status=False
+            return status
+    def isCheck(self,playerOne):
+        #Check if player is checked
+        kingCol,kingRow=0,0
+        if playerOne:
+            kingRow=self.playerOneKing.possibleCol[self.playerOneKing.col]
+            kingCol=self.playerOneKing.row-1
+        else:
+            kingRow=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
+            kingCol=self.playerTwoKing.row-1
+        #print(f"++++++++++++++++++++++++++++++++++++++++++++++++++++++++CHECKING FOR CHECK {playerOne,kingCol,kingRow}")
+
+        if len(self.checkBoard[kingCol][kingRow])!=0:
+            return True
+        else:
+            return False
+
+            
+
+
     def initPlayerOne(self,):
         """This populates the playerOnePieces (black) empty set with the player one's pieces. It also adds those pieces to the board
         """    
@@ -111,6 +190,7 @@ class Game():
             else:
                 if self.board[7][5] is None and self.board[7][6] is None and self.board[7][7] is not None and self.board[7][7].name=='Rook' and self.board[7][7].color=='WHITE':
                     #this means I can do castle
+                    #print('AM CASTLING ******************')
                     self.board[7][6]=self.playerTwoKing
                     self.board[self.playerTwoKing.row-1][self.possibleCol[self.playerTwoKing.col]]=None
                     self.playerTwoKing.row=8
@@ -170,8 +250,20 @@ class Game():
     def startGame(self):
         """This function when run on terminal would allow the user to play chess via terminal.
         """
+        print("Player One Put your move ex) 1A to 3B is how you move something")
+        print("If you want to castle type 'king-side castle' or 'queen-side castle' for the direction of castle you want")
 
         while True:
+            #Update the capture board to see the captures
+            self.updateCheckBoard(self.playerOneTurn)
+            #print(self.pBoard())
+            if self.isCheckMate(self.playerOneTurn):
+                print(self.__repr__())
+                if self.playerOneTurn:
+                    print('Player One lost, checkmate')
+                else:
+                    print('Player two lost, checkmate')
+                break
             # I am reseting the passant set because the opposing player can only take the passant piece on the first move it is possible to capture it only
             if self.playerOneTurn:
                 print(f'Player One turn \n Note: player TWO passant are {self.playerTwoPassantPawns}')
@@ -179,9 +271,14 @@ class Game():
             else:
                 print(f' Player two Turn \n Note: player one passant are {self.playerOnePassantPawns}')
                 self.playerTwoPassantPawns=set()
+
+            if self.isCheck(self.playerOneTurn):
+                if self.playerOneTurn:
+                    print('Player One in check')
+                else:
+                    print('Player two in check')
+                    
             print(self.__repr__())
-            print("Player One Put your move ex) 1A to 3B is how you move something")
-            print("If you want to castle type 'king-side castle' or 'queen-side castle' for the direction of castle you want")
             x=input().split()
             moveOne=x[0]
             moveTwo=x[1] if moveOne.lower()=='king-side' or moveOne.lower()=='queen-side' else x[2]
@@ -190,10 +287,44 @@ class Game():
                     self.attemptKingCastle(self.playerOneTurn)
                 elif moveOne.lower()=='queen-side':
                     self.attemptQueenCastle(self.playerOneTurn)
+                elif self.isCheck(self.playerOneTurn):
+                    print('Make a move to move away from Check')
+                    self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
                 else:
                     self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
                 self.playerOneTurn= not self.playerOneTurn
                 print('\n'*4)
             except Exception as identifier:
                 print(identifier)
+    def pBoard(self):
+        """Given a 2d list representing the self.board w/ pieces. This function returns a user friendly string depicting the board. The board is already provided because it is a member variable.
+        """
+        '''
+        count=1
+        for row in self.board:
+            print(f'{count}-{row}')
+            count+=1
+        temp=[chr(ord('A')+i) for i in range(8)]
+        return temp
+        '''
+
+        tempBoard=[[k for k in i] for i in self.checkBoard]        
+        #Add column labeling
+        columnLetters = [chr(ord('A')+i)       for i in range(8)]
+        columnLetters.insert(0,'_')
+        tempBoard.insert(0,columnLetters)
+        
+        #add row labeling
+        count=1
+        for i in range(1,len(tempBoard)):
+            tempBoard[i].insert(0,count)
+            count+=1
+        #Format board display
+        # COde found @ https://stackoverflow.com/questions/13214809/pretty-print-2d-python-list
+        s = [[str(e) for e in row] for row in tempBoard]
+        lens = [max(map(len, col)) for col in zip(*s)]
+        fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
+        table = [fmt.format(*row) for row in s]
+        return '\n'.join(table)
+
 

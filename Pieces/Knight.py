@@ -35,4 +35,20 @@ class Knight(Piece):
                 moves.add((tempRow+i,tempCol+k))            
         return moves
 
+    def possibleCapturesCheck(self):
+        """Returns a set of the avaiable moves the knight can make for a king check
 
+        :return: A set of the available moves the knight can make for check. It is a set of tuples of the rows and colms that the move can move to
+        :rtype: {(int,str)}
+        """
+        moves=set()
+        #The knight moves in 8 different moves in 8 different L like moves
+        
+        tempRow=self.row-1
+        tempCol=self.possibleCol[self.col]
+        #This is the L moves direction
+        direction=[(2,-1),(2,1),(-2,-1),(-2,1), (1,-2), (-1,-2), (1,2), (-1,2)]     
+        for (i,k) in direction:
+            if 0<=tempRow+i<=7 and 0<=tempCol+k<=7 and (self.board[tempRow+i][tempCol+k] is None or self.validMoveIncludingKing(tempRow+i,tempCol+k)):
+                moves.add((tempRow+i,tempCol+k))            
+        return moves

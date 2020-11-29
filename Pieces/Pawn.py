@@ -38,7 +38,7 @@ class Pawn(Piece):
             if tempRow==1 and self.board[tempRow+1][tempCol] is None and self.board[tempRow+2][tempCol] is None:
                 moves.add((tempRow+2,tempCol))
                 
-            print((0<=tempRow+1<=7,0<=tempCol+1<=7,self.validMove(tempRow,tempCol)))
+            #print((0<=tempRow+1<=7,0<=tempCol+1<=7,self.validMove(tempRow,tempCol)))
 
             #Now the capture moves
             if 0<=tempRow+1<=7 and 0<=tempCol-1<=7 and self.board[tempRow+1][tempCol-1] is not None and self.validMove(tempRow+1,tempCol-1):
@@ -66,7 +66,7 @@ class Pawn(Piece):
             if tempRow==6 and self.board[tempRow-1][tempCol] is None and self.board[tempRow-2][tempCol] is None:
                 moves.add((tempRow-2,tempCol))
                 
-            print((0<=tempRow+1<=7,0<=tempCol+1<=7,self.validMove(tempRow,tempCol)))
+            #print((0<=tempRow+1<=7,0<=tempCol+1<=7,self.validMove(tempRow,tempCol)))
 
             #Now the capture moves
             if 0<=tempRow-1<=7 and 0<=tempCol-1<=7 and self.board[tempRow-1][tempCol-1] is not None and self.validMove(tempRow-1,tempCol-1):
@@ -84,7 +84,7 @@ class Pawn(Piece):
         return moves
     
     def isPassant(self,tempOriginalRow,targetRow,targetCol):
-        print((self.hasMoved,self.col,targetCol,abs(tempOriginalRow-targetRow)))
+        #print((self.hasMoved,self.col,targetCol,abs(tempOriginalRow-targetRow)))
         if self.hasMoved == False and self.col == targetCol and abs(tempOriginalRow-targetRow)==2:
             return True
         return False
@@ -104,14 +104,14 @@ class Pawn(Piece):
         if (targetRow-1,self.possibleCol[targetCol]) in self.availableMoves():
             #Check if there is already a piece there. If so, remove it and replace
             if self.board[targetRow-1][self.possibleCol[targetCol]] is not None:
-                print("if")
+                #print("if")
                 self.board[targetRow-1][self.possibleCol[targetCol]].removeFromGroup()
                 self.board[targetRow-1][self.possibleCol[targetCol]]=self
                 self.board[self.row-1][self.possibleCol[self.col]]=None
                 self.row=targetRow
                 self.col=targetCol
             else:
-                print("else")
+                #print("else")
                 #Else, just move it to that location
                 #Note: I need to know check of the case it is en passant capture, not just a regular move
                 self.board[targetRow-1][self.possibleCol[targetCol]]=self
@@ -124,7 +124,7 @@ class Pawn(Piece):
                     self.board[targetRow-2][self.possibleCol[targetCol]]=None
 
                 elif self.color == 'WHITE' and self.board[targetRow][self.possibleCol[targetCol]] in self.game.playerOnePassantPawns:
-                    print('in white en passant captured')
+                    #print('in white en passant captured')
                     self.board[targetRow][self.possibleCol[targetCol]].removeFromGroup()
                     self.board[targetRow][self.possibleCol[targetCol]]=None   
 
@@ -140,10 +140,37 @@ class Pawn(Piece):
             self.hasMoved=True
             self.game.turn[0]+=1
             
-            print(self.game.turn[0])
+            #print(self.game.turn[0])
             
         else:
-            print("error FALSE MOVE")
-            print(f' requested {targetRow,targetCol} but available moves are {self.availableMoves()} ALSO {len(self.availableMoves())==0}')
-            print(self.__repr__())
+            #print("error FALSE MOVE")
+            #print(f' requested {targetRow,targetCol} but available moves are {self.availableMoves()} ALSO {len(self.availableMoves())==0}')
+            #print(self.__repr__())
             return False
+    def possibleCapturesCheck(self):
+        """Returns a set of the avaiable moves the pawn can make for a king check
+
+        :return: A set of the available moves the pawn can make for check. It is a set of tuples of the rows and colms that the move can move to
+        :rtype: {(int,str)}
+        """
+        moves=set()
+        #Up
+        # ex row=2 col=C            
+        tempRow=self.row-1 #1
+        tempCol=self.possibleCol[self.col] #2
+        #if black:
+        if self.color == 'BLACK':
+            #Now the capture moves
+            if 0<=tempRow+1<=7 and 0<=tempCol-1<=7 and self.board[tempRow+1][tempCol-1] is not None and self.validMoveIncludingKing(tempRow+1,tempCol-1):
+                moves.add((tempRow+1,tempCol-1))
+            
+            if 0<=tempRow+1<=7 and 0<=tempCol+1<=7 and self.board[tempRow+1][tempCol+1] is not None and self.validMoveIncludingKing(tempRow+1,tempCol+1):
+                moves.add((tempRow+1,tempCol+1))
+
+        else:
+            #Now the capture moves
+            if 0<=tempRow-1<=7 and 0<=tempCol-1<=7 and self.board[tempRow-1][tempCol-1] is not None and self.validMoveIncludingKing(tempRow-1,tempCol-1):
+                moves.add((tempRow-1,tempCol-1))
+            if 0<=tempRow-1<=7 and 0<=tempCol+1<=7 and self.board[tempRow-1][tempCol+1] is not None and self.validMoveIncludingKing(tempRow-1,tempCol+1):
+                moves.add((tempRow-1,tempCol+1))
+        return moves
