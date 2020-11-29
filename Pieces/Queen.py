@@ -138,4 +138,108 @@ class Queen(Piece):
         #The Queen moves basically in the directions of the rook & bishop. So I basically choose to copy & paste
         return self.diagonalMoves() | self.crossMoves()
         
+    def possibleCapturesCheck(self):
+        """Returns a set of the avaiable moves the queen can make for a king check
+
+        :return: A set of the available moves the queen can make for check. It is a set of tuples of the rows and colms that the move can move to
+        :rtype: {(int,str)}
+        """
+        #Copy and paste the move set of the bishop aka diagonal
+        moves=set()
+        tempRow=self.row
+        tempCol=self.possibleCol[self.col]-1
+        #Top left diagonal 
+        while 0<=tempCol<=7 and 0<=tempRow<=7:
+            if self.board[tempRow][tempCol] is None:
+                moves.add((tempRow,tempCol))
+            else:
+                if self.validMoveIncludingKing(tempRow,tempCol):
+                    moves.add((tempRow,tempCol))
+                break
+            tempRow+=1
+            tempCol-=1
+
+        #Top right diagonal 
+        tempRow=self.row
+        tempCol=self.possibleCol[self.col]+1
+        while 0<=tempCol<=7 and 0<=tempRow<=7:
+            if self.board[tempRow][tempCol] is None:
+                moves.add((tempRow,tempCol))
+            else:
+                if self.validMoveIncludingKing(tempRow,tempCol):
+                    moves.add((tempRow,tempCol))
+                break
+            tempRow+=1
+            tempCol+=1
+
+        #Bottom left diagonal 
+        tempRow=self.row-2
+        tempCol=self.possibleCol[self.col]-1
+        while 0<=tempCol<=7 and 0<=tempRow<=7:
+            if self.board[tempRow][tempCol] is None:
+                moves.add((tempRow,tempCol))
+            else:
+                if self.validMoveIncludingKing(tempRow,tempCol):
+                    moves.add((tempRow,tempCol))
+                break
+            tempRow-=1
+            tempCol-=1
+
+        #Bottom right diagonal 
+        tempRow=self.row-2
+        tempCol=self.possibleCol[self.col]+1
+        while 0<=tempCol<=7 and 0<=tempRow<=7:
+            if self.board[tempRow][tempCol] is None:
+                moves.add((tempRow,tempCol))
+            else:
+                if self.validMoveIncludingKing(tempRow,tempCol):
+                    moves.add((tempRow,tempCol))
+                break
+            tempRow-=1
+            tempCol+=1
+    
+        #Returns the set of cross moves, aka just the rook moves
+        moves2=set()
+        #Up
+        tempRow=self.row
+        tempCol=self.possibleCol[self.col]
+        for i in range(tempRow,8):
+            if self.board[i][tempCol] is not None:
+                if self.validMoveIncludingKing(i,tempCol):
+                    moves2.add((i,tempCol))
+                break
+            else:
+                moves2.add((i,tempCol))
+        #Down
+        tempRow=self.row-2
+        tempCol=self.possibleCol[self.col]
+        for i in range(tempRow,-1,-1):
+            if self.board[i][tempCol] is not None:
+                if self.validMoveIncludingKing(i,tempCol):
+                    moves2.add((i,tempCol))
+                break
+            else:
+                moves2.add((i,tempCol))
+        #Left
+        tempRow=self.row-1
+        tempCol=self.possibleCol[self.col]-1
+        for i in range(tempCol,-1,-1):
+            if self.board[tempRow][i] is not None:
+                if self.validMoveIncludingKing(tempRow,i):
+                    moves2.add((tempRow,i))
+                break
+            else:
+                moves2.add((tempRow,i))
+        #Right
+        tempRow=self.row-1
+        tempCol=self.possibleCol[self.col]+1
+        for i in range(tempCol,8):
+            if self.board[tempRow][i] is not None:
+                if self.validMoveIncludingKing(tempRow,i):
+                    moves2.add((tempRow,i))
+                break
+            else:
+                moves2.add((tempRow,i))
+        return moves | moves2
+
         

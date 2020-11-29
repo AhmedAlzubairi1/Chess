@@ -77,3 +77,62 @@ class Bishop(Piece):
             tempRow-=1
             tempCol+=1
         return moves
+    def possibleCapturesCheck(self):
+        """Returns a set of the avaiable moves the bishop can make for a king check
+
+        :return: A set of the available moves the bishop can make for check. It is a set of tuples of the rows and colms that the move can move to
+        :rtype: {(int,str)}
+        """
+        moves=set()
+        tempRow=self.row
+        tempCol=self.possibleCol[self.col]-1
+        #Top left diagonal 
+        while 0<=tempCol<=7 and 0<=tempRow<=7:
+            if self.board[tempRow][tempCol] is None:
+                moves.add((tempRow,tempCol))
+            else:
+                if self.validMoveIncludingKing(tempRow,tempCol):
+                    moves.add((tempRow,tempCol))
+                break
+            tempRow+=1
+            tempCol-=1
+
+        #Top right diagonal 
+        tempRow=self.row
+        tempCol=self.possibleCol[self.col]+1
+        while 0<=tempCol<=7 and 0<=tempRow<=7:
+            if self.board[tempRow][tempCol] is None:
+                moves.add((tempRow,tempCol))
+            else:
+                if self.validMoveIncludingKing(tempRow,tempCol):
+                    moves.add((tempRow,tempCol))
+                break
+            tempRow+=1
+            tempCol+=1
+
+        #Bottom left diagonal 
+        tempRow=self.row-2
+        tempCol=self.possibleCol[self.col]-1
+        while 0<=tempCol<=7 and 0<=tempRow<=7:
+            if self.board[tempRow][tempCol] is None:
+                moves.add((tempRow,tempCol))
+            else:
+                if self.validMoveIncludingKing(tempRow,tempCol):
+                    moves.add((tempRow,tempCol))
+                break
+            tempRow-=1
+            tempCol-=1
+
+        #Bottom right diagonal 
+        tempRow=self.row-2
+        tempCol=self.possibleCol[self.col]+1
+        while 0<=tempCol<=7 and 0<=tempRow<=7:
+            if self.board[tempRow][tempCol] is None:
+                moves.add((tempRow,tempCol))
+            else:
+                if self.validMoveIncludingKing(tempRow,tempCol):
+                    moves.add((tempRow,tempCol))
+                break
+            tempRow-=1
+            tempCol+=1
+        return moves

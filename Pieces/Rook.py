@@ -65,3 +65,52 @@ class Rook(Piece):
             else:
                 moves.add((tempRow,i))
         return moves
+    def possibleCapturesCheck(self):
+        """Returns a set of the avaiable moves the queen can make for a king check
+
+        :return: A set of the available moves the queen can make for check. It is a set of tuples of the rows and colms that the move can move to
+        :rtype: {(int,str)}
+        """
+        #Copy and paste the move set of the bishop aka diagonal
+        moves=set()
+        #Up
+        tempRow=self.row
+        tempCol=self.possibleCol[self.col]
+        for i in range(tempRow,8):
+            if self.board[i][tempCol] is not None:
+                if self.validMoveIncludingKing(i,tempCol):
+                    moves.add((i,tempCol))
+                break
+            else:
+                moves.add((i,tempCol))
+        #Down
+        tempRow=self.row-2
+        tempCol=self.possibleCol[self.col]
+        for i in range(tempRow,-1,-1):
+            if self.board[i][tempCol] is not None:
+                if self.validMoveIncludingKing(i,tempCol):
+                    moves.add((i,tempCol))
+                break
+            else:
+                moves.add((i,tempCol))
+        #Left
+        tempRow=self.row-1
+        tempCol=self.possibleCol[self.col]-1
+        for i in range(tempCol,-1,-1):
+            if self.board[tempRow][i] is not None:
+                if self.validMoveIncludingKing(tempRow,i):
+                    moves.add((tempRow,i))
+                break
+            else:
+                moves.add((tempRow,i))
+        #Right
+        tempRow=self.row-1
+        tempCol=self.possibleCol[self.col]+1
+        for i in range(tempCol,8):
+            if self.board[tempRow][i] is not None:
+                if self.validMoveIncludingKing(tempRow,i):
+                    moves.add((tempRow,i))
+                break
+            else:
+                moves.add((tempRow,i))
+        return moves

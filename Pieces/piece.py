@@ -63,7 +63,21 @@ class Piece():
         if self.board[row][col].color != self.color and self.notKing(row,col):
             return True
         return False
+    def validMoveIncludingKing(self,row,col):
+        """Given a desired move of the piece, the method returns true if the player can move the piece to that location.
+           This also includes the possibility of capturing a king as well
 
+        :param row: The row of the desired location. Number between 1 to 8
+        :type row: int
+        :param col: The column of the desired location. Letter between A and H.
+        :type col: str
+        :return: True if the desired moove can be made, or false if it can't be made.
+        :rtype: bool
+        """
+        print(f'valid move requested row,col is {(row,col)} and that color is {self.board[row][col].color} and our color is {self.color}')
+        if self.board[row][col].color != self.color:
+            return True
+        return False
         
 
     def notKing(self,row,col):
@@ -90,7 +104,8 @@ class Piece():
         :return: Returns true if the move was successfully made with no issue. False if an error occured.
         :rtype: bool
         """
-        #Example input : 1A for bottom left location 
+        #Example input : 1A for bottom left location
+        #print(f'MOVES ARE: {self.availableMoves()} -----------------')
         if (targetRow-1,self.possibleCol[targetCol]) in self.availableMoves():
             #Check if there is already a piece there. If so, remove it and replace
             if self.board[targetRow-1][self.possibleCol[targetCol]] is not None:
@@ -119,7 +134,8 @@ class Piece():
             print(f' requested {targetRow,targetCol} but available moves are {self.availableMoves()} ALSO {len(self.availableMoves())==0}')
             print(self.__repr__())
             return False
-
+    def possibleCapturesCheck(self):
+        pass
     def removeFromGroup(self):
         """This removes the piece from the current player's set
         """

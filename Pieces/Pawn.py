@@ -147,3 +147,30 @@ class Pawn(Piece):
             print(f' requested {targetRow,targetCol} but available moves are {self.availableMoves()} ALSO {len(self.availableMoves())==0}')
             print(self.__repr__())
             return False
+    def possibleCapturesCheck(self):
+        """Returns a set of the avaiable moves the pawn can make for a king check
+
+        :return: A set of the available moves the pawn can make for check. It is a set of tuples of the rows and colms that the move can move to
+        :rtype: {(int,str)}
+        """
+        moves=set()
+        #Up
+        # ex row=2 col=C            
+        tempRow=self.row-1 #1
+        tempCol=self.possibleCol[self.col] #2
+        #if black:
+        if self.color == 'BLACK':
+            #Now the capture moves
+            if 0<=tempRow+1<=7 and 0<=tempCol-1<=7 and self.board[tempRow+1][tempCol-1] is not None and self.validMoveIncludingKing(tempRow+1,tempCol-1):
+                moves.add((tempRow+1,tempCol-1))
+            
+            if 0<=tempRow+1<=7 and 0<=tempCol+1<=7 and self.board[tempRow+1][tempCol+1] is not None and self.validMoveIncludingKing(tempRow+1,tempCol+1):
+                moves.add((tempRow+1,tempCol+1))
+
+        else:
+            #Now the capture moves
+            if 0<=tempRow-1<=7 and 0<=tempCol-1<=7 and self.board[tempRow-1][tempCol-1] is not None and self.validMoveIncludingKing(tempRow-1,tempCol-1):
+                moves.add((tempRow-1,tempCol-1))
+            if 0<=tempRow-1<=7 and 0<=tempCol+1<=7 and self.board[tempRow-1][tempCol+1] is not None and self.validMoveIncludingKing(tempRow-1,tempCol+1):
+                moves.add((tempRow-1,tempCol+1))
+        return moves
