@@ -32,22 +32,54 @@ class Game():
         for i in range(len(self.checkBoard)):
             for k in range(len(self.checkBoard[i])):
                 self.checkBoard[i][k]=[]
-    def updateCheckBoardPlayerOne(self):
-        """ This updated the checkBoard with PlayerOne checks on PlayerTwo
+    def updateCheckBoard(self,playerOne):
+        """ This updated the checkBoard with PlayerTwo checks on PlayerOne if the playerOne paramter is true, and opposite if false
+        
+        :param playerOne: Boolean representing if it is playerOne's check
+        :type playerOne: bool
         """
+   
         #This should update with moves of playerOne
         self.resetCheckBoard()
-        for piece in self.playerOnePieces:
+        playerPieces= self.playerTwoPieces if playerOne else self.playerOnePieces
+        for piece in playerPieces:
             #Here piece is the objects
+            #print(piece)
+            #print(piece.possibleCapturesCheck())
+            #raise Exception
             for capture in piece.possibleCapturesCheck():
                 c,r=capture
                 self.checkBoard[c][r].append(piece)
+    def isCheckmate(self,playerOne):
+        #Check if player is checkmated
+        if playerOne:
+            kingCol=self.playerOneKing.possibleCol[self.playerOneKing.col]
+            kingRow=self.playerOneKing.row-1
+            status=True
+            #Check if king cant make a move, but still also cant be captured
+            if len(self.playerOneKing.availableMoves())==0 and len(self.checkBoard[kingCol][kingRow])==0:
+                return False
+            #Now check if the king can still move, if it can, player isnt on checkmate
+            for c,r in self.playerOneKing.availableMoves():
+                if len(self.checkBoard[c][r])==0:
+                    status=False
+            return status
+        else:
+            kingCol=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
+            kingRow=self.playerTwoKing.row-1
+            status=True
+            #Check if king cant make a move, but still also cant be captured
+            if len(self.playerTwoKing.availableMoves())==0 and len(self.checkBoard[kingCol][kingRow])==0:
+                return False
+            #Now check if the king can still move, if it can, player isnt on checkmate
+            for c,r in self.playerTwoKing.availableMoves():
+                if len(self.checkBoard[c][r])==0:
+                    status=False
+            return status
+
+
             
-    def updateCheckBoardPlayerTwo(self):
-        """ This updated the checkBoard with PlayerTwo checks on PlayerOne
-        """
-        pass
-        
+
 
     def initPlayerOne(self,):
         """This populates the playerOnePieces (black) empty set with the player one's pieces. It also adds those pieces to the board
@@ -200,6 +232,17 @@ class Game():
         """
 
         while True:
+            #Update the capture board to see the captures
+            self.updateCheckBoard(self.playerOneTurn)
+            print('CHECKKKKKKKKKKKKKKKKKKK')
+            print(self.checkBoard)
+            print('CHECKKKKKKKKKKKKKKKKKKK')
+            if self.isCheckMate(self.playerOneTurn):
+                if self.playerOneTurn:
+                    print('Player One lost, checkSmate')
+                else:
+                    print('Player two lost, checkmate')
+                break
             # I am reseting the passant set because the opposing player can only take the passant piece on the first move it is possible to capture it only
             if self.playerOneTurn:
                 print(f'Player One turn \n Note: player TWO passant are {self.playerTwoPassantPawns}')
@@ -207,6 +250,7 @@ class Game():
             else:
                 print(f' Player two Turn \n Note: player one passant are {self.playerOnePassantPawns}')
                 self.playerTwoPassantPawns=set()
+
             print(self.__repr__())
             print("Player One Put your move ex) 1A to 3B is how you move something")
             print("If you want to castle type 'king-side castle' or 'queen-side castle' for the direction of castle you want")
