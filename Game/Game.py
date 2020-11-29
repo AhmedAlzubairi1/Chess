@@ -8,6 +8,7 @@ from Pieces.Pawn import Pawn
 from Pieces.Queen import Queen
 from Pieces.Rook import Rook
 from prettytable import PrettyTable
+from copy import deepcopy
 
 class Game():
     def __init__(self):
@@ -85,7 +86,7 @@ class Game():
         else:
             kingCol=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
             kingRow=self.playerTwoKing.row-1
-            
+
         if len(self.checkBoard[kingCol][kingRow])!=0:
             return True
         else:
@@ -243,6 +244,8 @@ class Game():
     def startGame(self):
         """This function when run on terminal would allow the user to play chess via terminal.
         """
+        print("Player One Put your move ex) 1A to 3B is how you move something")
+        print("If you want to castle type 'king-side castle' or 'queen-side castle' for the direction of castle you want")
 
         while True:
             #Update the capture board to see the captures
@@ -252,7 +255,7 @@ class Game():
             print('CHECKKKKKKKKKKKKKKKKKKK')
             if self.isCheckMate(self.playerOneTurn):
                 if self.playerOneTurn:
-                    print('Player One lost, checkSmate')
+                    print('Player One lost, checkmate')
                 else:
                     print('Player two lost, checkmate')
                 break
@@ -264,9 +267,13 @@ class Game():
                 print(f' Player two Turn \n Note: player one passant are {self.playerOnePassantPawns}')
                 self.playerTwoPassantPawns=set()
 
+            if self.isCheck(self.playerOneTurn):
+                if self.playerOneTurn:
+                    print('Player One in check')
+                else:
+                    print('Player two in check')
+                    
             print(self.__repr__())
-            print("Player One Put your move ex) 1A to 3B is how you move something")
-            print("If you want to castle type 'king-side castle' or 'queen-side castle' for the direction of castle you want")
             x=input().split()
             moveOne=x[0]
             moveTwo=x[1] if moveOne.lower()=='king-side' or moveOne.lower()=='queen-side' else x[2]
@@ -275,6 +282,10 @@ class Game():
                     self.attemptKingCastle(self.playerOneTurn)
                 elif moveOne.lower()=='queen-side':
                     self.attemptQueenCastle(self.playerOneTurn)
+                elif self.isCheck(self.playerOneTurn):
+                    print('Make a move to move away from Check')
+                    self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
+
                 else:
                     self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
                 self.playerOneTurn= not self.playerOneTurn
