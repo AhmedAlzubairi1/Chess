@@ -190,7 +190,7 @@ class Game():
             else:
                 if self.board[7][5] is None and self.board[7][6] is None and self.board[7][7] is not None and self.board[7][7].name=='Rook' and self.board[7][7].color=='WHITE':
                     #this means I can do castle
-                    print('AM CASTLING ******************')
+                    #print('AM CASTLING ******************')
                     self.board[7][6]=self.playerTwoKing
                     self.board[self.playerTwoKing.row-1][self.possibleCol[self.playerTwoKing.col]]=None
                     self.playerTwoKing.row=8
@@ -256,13 +256,9 @@ class Game():
         while True:
             #Update the capture board to see the captures
             self.updateCheckBoard(self.playerOneTurn)
-            print('CHECKKKKKKKKKKKKKKKKKKK')
-            print(self.pBoard())
-            print('CHECKKKKKKKKKKKKKKKKKKK')
+            #print(self.pBoard())
             if self.isCheckMate(self.playerOneTurn):
-                print('*****************************************************************************CHECKMATE')
                 print(self.__repr__())
-
                 if self.playerOneTurn:
                     print('Player One lost, checkmate')
                 else:
@@ -277,7 +273,6 @@ class Game():
                 self.playerTwoPassantPawns=set()
 
             if self.isCheck(self.playerOneTurn):
-                print('*****************************************************************************CHECK')
                 if self.playerOneTurn:
                     print('Player One in check')
                 else:

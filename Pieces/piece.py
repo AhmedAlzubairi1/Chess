@@ -59,7 +59,7 @@ class Piece():
         :return: True if the desired moove can be made, or false if it can't be made.
         :rtype: bool
         """
-        print(f'valid move requested row,col is {(row,col)} and that color is {self.board[row][col].color} and our color is {self.color}')
+        #print(f'valid move requested row,col is {(row,col)} and that color is {self.board[row][col].color} and our color is {self.color}')
         if self.board[row][col].color != self.color and self.notKing(row,col):
             return True
         return False
@@ -74,7 +74,7 @@ class Piece():
         :return: True if the desired moove can be made, or false if it can't be made.
         :rtype: bool
         """
-        print(f'valid move requested row,col is {(row,col)} and that color is {self.board[row][col].color} and our color is {self.color}')
+        #print(f'valid move requested row,col is {(row,col)} and that color is {self.board[row][col].color} and our color is {self.color}')
         if self.board[row][col].color != self.color:
             return True
         return False
@@ -109,14 +109,14 @@ class Piece():
         if (targetRow-1,self.possibleCol[targetCol]) in self.availableMoves():
             #Check if there is already a piece there. If so, remove it and replace
             if self.board[targetRow-1][self.possibleCol[targetCol]] is not None:
-                print("if")
+                #print("if")
                 self.board[targetRow-1][self.possibleCol[targetCol]].removeFromGroup()
                 self.board[targetRow-1][self.possibleCol[targetCol]]=self
                 self.board[self.row-1][self.possibleCol[self.col]]=None
                 self.row=targetRow
                 self.col=targetCol
             else:
-                print("else")
+                #print("else")
                 #Else, just move it to that location
                 self.board[targetRow-1][self.possibleCol[targetCol]]=self
                 self.board[self.row-1][self.possibleCol[self.col]]=None
@@ -127,23 +127,23 @@ class Piece():
             self.hasMoved=True
             self.game.turn[0]+=1
             
-            print(self.game.turn[0])
+            #print(self.game.turn[0])
             
         else:
-            print("error FALSE MOVE")
-            print(f' requested {targetRow,targetCol} but available moves are {self.availableMoves()} ALSO {len(self.availableMoves())==0}')
-            print(self.__repr__())
+            #print("error FALSE MOVE")
+            #print(f' requested {targetRow,targetCol} but available moves are {self.availableMoves()} ALSO {len(self.availableMoves())==0}')
+            #print(self.__repr__())
             return False
     def possibleCapturesCheck(self):
         pass
     def removeFromGroup(self):
         """This removes the piece from the current player's set
         """
-        print('test')
-        print(self.group)
-        print(self)
-        print(self in self.group)
-        print('test')
+        #print('test')
+        #print(self.group)
+        #print(self)
+        #print(self in self.group)
+        #print('test')
         self.group.remove(self)
     
     def __hash__(self):
