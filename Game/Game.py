@@ -51,12 +51,14 @@ class Game():
             for capture in piece.possibleCapturesCheck():
                 c,r=capture
                 self.checkBoard[c][r].append(piece)
-    def isCheckmate(self,playerOne):
+    def isCheckMate(self,playerOne):
         #Check if player is checkmated
         if playerOne:
-            kingCol=self.playerOneKing.possibleCol[self.playerOneKing.col]
-            kingRow=self.playerOneKing.row-1
+            #For some reason doing a flip of row and col for checkMate and works
+            kingRow=self.playerOneKing.possibleCol[self.playerOneKing.col]
+            kingCol=self.playerOneKing.row-1
             status=True
+            #print(f'***************** -{self.playerOneKing.availableMoves(),len(self.checkBoard[kingCol][kingRow]),kingCol,kingRow} -***********')
             #Check if king cant make a move, but still also cant be captured
             if len(self.playerOneKing.availableMoves())==0 and len(self.checkBoard[kingCol][kingRow])==0:
                 return False
@@ -66,9 +68,11 @@ class Game():
                     status=False
             return status
         else:
-            kingCol=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
-            kingRow=self.playerTwoKing.row-1
+            kingRow=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
+            kingCol=self.playerTwoKing.row-1
+            # Example for col,row is E,8 OR 4, 7
             status=True
+            #print(f'***************** -{self.playerTwoKing.availableMoves(),len(self.checkBoard[kingCol][kingRow]),kingCol,kingRow} -***********')
             #Check if king cant make a move, but still also cant be captured
             if len(self.playerTwoKing.availableMoves())==0 and len(self.checkBoard[kingCol][kingRow])==0:
                 return False
@@ -81,11 +85,12 @@ class Game():
         #Check if player is checked
         kingCol,kingRow=0,0
         if playerOne:
-            kingCol=self.playerOneKing.possibleCol[self.playerOneKing.col]
-            kingRow=self.playerOneKing.row-1
+            kingRow=self.playerOneKing.possibleCol[self.playerOneKing.col]
+            kingCol=self.playerOneKing.row-1
         else:
-            kingCol=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
-            kingRow=self.playerTwoKing.row-1
+            kingRow=self.playerTwoKing.possibleCol[self.playerTwoKing.col]
+            kingCol=self.playerTwoKing.row-1
+        #print(f"++++++++++++++++++++++++++++++++++++++++++++++++++++++++CHECKING FOR CHECK {playerOne,kingCol,kingRow}")
 
         if len(self.checkBoard[kingCol][kingRow])!=0:
             return True
@@ -185,6 +190,7 @@ class Game():
             else:
                 if self.board[7][5] is None and self.board[7][6] is None and self.board[7][7] is not None and self.board[7][7].name=='Rook' and self.board[7][7].color=='WHITE':
                     #this means I can do castle
+                    print('AM CASTLING ******************')
                     self.board[7][6]=self.playerTwoKing
                     self.board[self.playerTwoKing.row-1][self.possibleCol[self.playerTwoKing.col]]=None
                     self.playerTwoKing.row=8
@@ -251,9 +257,12 @@ class Game():
             #Update the capture board to see the captures
             self.updateCheckBoard(self.playerOneTurn)
             print('CHECKKKKKKKKKKKKKKKKKKK')
-            print(self.checkBoard)
+            print(self.pBoard())
             print('CHECKKKKKKKKKKKKKKKKKKK')
             if self.isCheckMate(self.playerOneTurn):
+                print('*****************************************************************************CHECKMATE')
+                print(self.__repr__())
+
                 if self.playerOneTurn:
                     print('Player One lost, checkmate')
                 else:
@@ -268,6 +277,7 @@ class Game():
                 self.playerTwoPassantPawns=set()
 
             if self.isCheck(self.playerOneTurn):
+                print('*****************************************************************************CHECK')
                 if self.playerOneTurn:
                     print('Player One in check')
                 else:
@@ -285,11 +295,41 @@ class Game():
                 elif self.isCheck(self.playerOneTurn):
                     print('Make a move to move away from Check')
                     self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
-
                 else:
                     self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(int(moveTwo[0]),moveTwo[1])
                 self.playerOneTurn= not self.playerOneTurn
                 print('\n'*4)
             except Exception as identifier:
                 print(identifier)
+    def pBoard(self):
+        """Given a 2d list representing the self.board w/ pieces. This function returns a user friendly string depicting the board. The board is already provided because it is a member variable.
+        """
+        '''
+        count=1
+        for row in self.board:
+            print(f'{count}-{row}')
+            count+=1
+        temp=[chr(ord('A')+i) for i in range(8)]
+        return temp
+        '''
+
+        tempBoard=[[k for k in i] for i in self.checkBoard]        
+        #Add column labeling
+        columnLetters = [chr(ord('A')+i)       for i in range(8)]
+        columnLetters.insert(0,'_')
+        tempBoard.insert(0,columnLetters)
+        
+        #add row labeling
+        count=1
+        for i in range(1,len(tempBoard)):
+            tempBoard[i].insert(0,count)
+            count+=1
+        #Format board display
+        # COde found @ https://stackoverflow.com/questions/13214809/pretty-print-2d-python-list
+        s = [[str(e) for e in row] for row in tempBoard]
+        lens = [max(map(len, col)) for col in zip(*s)]
+        fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
+        table = [fmt.format(*row) for row in s]
+        return '\n'.join(table)
+
 
