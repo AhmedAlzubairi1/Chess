@@ -14,6 +14,8 @@ class Game():
         self.playerOnePieces=set()
         self.playerTwoPieces=set()
         self.board=[[None]*8 for i in range(8)]
+        #3d board for all possible captures
+        self.checkBoard= [[[0 for k in range(0)] for j in range(8)] for i in range(8)]
         self.initGame()
         self.possibleRow={i:i-1 for i in range(1,9)}
         self.possibleCol={chr(i):i-ord('A') for i in range(ord('A'),ord('A')+8)}
@@ -21,11 +23,32 @@ class Game():
         self.playerOnePassantPawns=set()
         self.playerTwoPassantPawns=set()
         self.playerOneTurn=True
-        self.gameEnd=False
-        self.playerOneWon=False
-        self.playerTwoWon=False
-        self.playerOneChecks=set()
-        self.playerTwoChecks=set()
+        #these 5 are added from check
+        # Should be iether 1 or 2 to denote who won
+        self.gameEnd=0
+    def resetCheckBoard(self):
+        """This resets the checkBoard by making all the positions None
+        """
+        for i in range(len(self.checkBoard)):
+            for k in range(len(self.checkBoard[i])):
+                self.checkBoard[i][k]=[]
+    def updateCheckBoardPlayerOne(self):
+        """ This updated the checkBoard with PlayerOne checks on PlayerTwo
+        """
+        #This should update with moves of playerOne
+        self.resetCheckBoard()
+        for piece in self.playerOnePieces:
+            #Here piece is the objects
+            for capture in piece.possibleCapturesCheck():
+                c,r=capture
+                self.checkBoard[c][r].append(piece)
+            
+    def updateCheckBoardPlayerTwo(self):
+        """ This updated the checkBoard with PlayerTwo checks on PlayerOne
+        """
+        pass
+        
+
     def initPlayerOne(self,):
         """This populates the playerOnePieces (black) empty set with the player one's pieces. It also adds those pieces to the board
         """    
