@@ -19,3 +19,7 @@ The game would shift between players so that each player gets a turn until someo
 
 
 When creating your frontend, you would need to copy the logic in the terminalGame.py file. Specifically you need to use the initGame, function to start the game. THen you can use whatever frontend you want to make the chess game.
+
+
+Demo is:
+![](demo.gif)
