@@ -20,6 +20,12 @@ The game would shift between players so that each player gets a turn until someo
 
 When creating your frontend, you would need to copy the logic in the terminalGame.py file. Specifically you need to use the initGame, function to start the game. THen you can use whatever frontend you want to make the chess game.
 
+To run the game on the terminal front end, go to the Game directory and run the python script gameRunner.py as such:
 
-Demo is:
+```
+cd Game
+python gameRunner.py
+```
+Follow the instructions to move pieces. First to get a check mate wins.
+To demo The chess engine on the front end w/ terminal interface:
 ![](demo.gif)
