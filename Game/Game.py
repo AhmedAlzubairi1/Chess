@@ -1,9 +1,17 @@
-from Pieces.Bishop import Bishop
-from Pieces.King import King
-from Pieces.Knight import Knight
-from Pieces.Pawn import Pawn
-from Pieces.Queen import Queen
-from Pieces.Rook import Rook
+try:
+    from Pieces.Bishop import Bishop
+    from Pieces.King import King
+    from Pieces.Knight import Knight
+    from Pieces.Pawn import Pawn
+    from Pieces.Queen import Queen
+    from Pieces.Rook import Rook
+except Exception:
+    from .Pieces.Bishop import Bishop
+    from .Pieces.King import King
+    from .Pieces.Knight import Knight
+    from .Pieces.Pawn import Pawn
+    from .Pieces.Queen import Queen
+    from .Pieces.Rook import Rook
 
 
 class Game():
