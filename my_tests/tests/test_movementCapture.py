@@ -4,15 +4,25 @@ from Game.Pieces.Pawn import Pawn
 from Game.Pieces.Knight import Knight
 from Game.Pieces.King import King
 from Game.Pieces.Bishop import Bishop
-from sys import path
-from os.path import dirname as dir
-#path.append(dir(path[0])[0:dir(path[0]).rfind('\\')])
+# from sys import path
+# from os.path import dirname as dir
+# path.append(dir(path[0])[0:dir(path[0]).rfind('\\')])
 # Make sure to appending c:\Users\Ahmed Alzubairi\Documents\Open
 # Source\COMS4995
 
+
 def test_sample():
-    x=Bishop([[1,2,3],[4,5,6]],'BLACK',set(),1,'A',[])
+    x = Bishop([[1, 2, 3], [4, 5, 6]], 'BLACK', set(), 1, 'A', [])
+    x = Queen([[1, 2, 3], [4, 5, 6]], 'BLACK', set(), 1, 'A', [])
+    x = King([[1, 2, 3], [4, 5, 6]], 'BLACK', set(), 1, 'A', [])
+    x = Knight([[1, 2, 3], [4, 5, 6]], 'BLACK', set(), 1, 'A', [])
+    x = Rook([[1, 2, 3], [4, 5, 6]], 'BLACK', set(), 1, 'A', [])
+    x = Pawn([[1, 2, 3], [4, 5, 6]], 'BLACK', set(), 1, 'A', [])
+    print(x)
+
     assert 1 == 1
+
+
 '''
 def test_pawn_move():
     """Tests if the pawn can move
