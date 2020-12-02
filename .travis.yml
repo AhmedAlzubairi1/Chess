@@ -7,7 +7,7 @@ install:
   - pip install flake8 codecov pytest pytest-cov
 
 script:
-  - python3.7 -m flake8 my_tests/
+  - python3.7 -m flake8 Game/
   - python3.7 -m pytest -vvv my_tests/ --cov=Game
 
 after_success:
