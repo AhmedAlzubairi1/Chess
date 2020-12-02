@@ -1,6 +1,6 @@
 from sys import path
 from os.path import dirname as dir
-path.append(dir(path[0]))
+#path.append(dir(path[0]))
 from  Pieces.Bishop import Bishop
 from Pieces.King import King
 from Pieces.Knight import Knight
