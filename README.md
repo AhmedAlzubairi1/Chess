@@ -1,7 +1,7 @@
 # Chess
 ![GitHub](https://img.shields.io/github/license/AhmedAlzubairi1/COMS4995?style=plastic)
 [![Build Status](https://travis-ci.org/AhmedAlzubairi1/Chess.svg?branch=master)](https://travis-ci.org/AhmedAlzubairi1/Chess)
-![Codecov](https://img.shields.io/codecov/c/github/AhmedAlzubairi1/Chess)
+[![codecov](https://codecov.io/gh/AhmedAlzubairi1/Chess/branch/master/graph/badge.svg?token=37GQ0IOMUG)](https://codecov.io/gh/AhmedAlzubairi1/Chess)
 [![Docs](https://img.shields.io/readthedocs/chess.svg)](https://chess1.readthedocs.io)
 
 COMS4995 Project -> Chess Backend
