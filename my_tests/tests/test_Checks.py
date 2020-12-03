@@ -2,6 +2,8 @@ from Game.Game import Game
 
 
 def test_Check():
+    """Tests if you can Check King
+    """
     myGame = Game()
 
     def move(x, moveOne, moveTwo):
@@ -20,6 +22,8 @@ def test_Check():
 
 
 def test_CheckMate():
+    """Tests if you can checkmate king
+    """
     myGame = Game()
     print(myGame)
     print(myGame.pBoard())

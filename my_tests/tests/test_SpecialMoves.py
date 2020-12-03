@@ -2,6 +2,8 @@ from Game.Game import Game
 
 
 def test_King_Castle():
+    """Tests if you can do king side castle
+    """
     myGame = Game()
 
     def move(x, moveOne, moveTwo):
@@ -17,6 +19,8 @@ def test_King_Castle():
 
 
 def test_White_King_Castle():
+    """ Tests if White pieces can do king side castle
+    """
     myGame = Game()
 
     def move(x, moveOne, moveTwo):
@@ -32,6 +36,8 @@ def test_White_King_Castle():
 
 
 def test_Queen_Castle():
+    """Tests Queen Side Castle
+    """
     myGame = Game()
 
     def move(x, moveOne, moveTwo):
@@ -48,6 +54,8 @@ def test_Queen_Castle():
 
 
 def test_White_Queen_Castle():
+    """Tests if White pieces can do Queen side castle
+    """
     myGame = Game()
 
     def move(x, moveOne, moveTwo):
@@ -64,6 +72,8 @@ def test_White_Queen_Castle():
 
 
 def test_Pawn_Passant():
+    """Tests if pawns can do a pawn passant capture
+    """
     myGame = Game()
 
     def move(x, moveOne, moveTwo):
