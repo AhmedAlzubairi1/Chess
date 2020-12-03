@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/AhmedAlzubairi1/Chess.svg?branch=master)](https://travis-ci.org/AhmedAlzubairi1/Chess)
 [![codecov](https://codecov.io/gh/AhmedAlzubairi1/Chess/branch/master/graph/badge.svg?token=37GQ0IOMUG)](https://codecov.io/gh/AhmedAlzubairi1/Chess)
 [![Docs](https://img.shields.io/readthedocs/chess.svg)](https://chess1.readthedocs.io)
-[![Personal Website] (https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>)] (https://ahmedalzubairi1.github.io/ahmedalzubairi.github.io/)
+[![Personal Website](https://img.shields.io/badge/lol-bob-blue)] (https://ahmedalzubairi1.github.io/ahmedalzubairi.github.io/)
 https://ahmedalzubairi1.github.io/ahmedalzubairi.github.io/
 COMS4995 Project -> Chess Backend
 
