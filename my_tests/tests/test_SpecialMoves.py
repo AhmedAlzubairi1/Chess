@@ -15,8 +15,10 @@ def test_King_Castle():
     assert king == myGame.board[0][6]
     assert rook == myGame.board[0][5]
 
+
 def test_White_King_Castle():
     myGame = Game()
+
     def move(x, moveOne, moveTwo):
         x.board[x.possibleRow[int(moveOne[0])]][x.possibleCol[moveOne[1]]].move(int(moveTwo[0]), moveTwo[1])
     king = myGame.board[7][4]
@@ -28,8 +30,10 @@ def test_White_King_Castle():
     assert king == myGame.board[7][6]
     assert rook == myGame.board[7][5]
 
+
 def test_Queen_Castle():
     myGame = Game()
+
     def move(x, moveOne, moveTwo):
         x.board[x.possibleRow[int(moveOne[0])]][x.possibleCol[moveOne[1]]].move(int(moveTwo[0]), moveTwo[1])
     king = myGame.board[0][4]
@@ -42,8 +46,10 @@ def test_Queen_Castle():
     assert king == myGame.board[0][2]
     assert rook == myGame.board[0][3]
 
+
 def test_White_Queen_Castle():
     myGame = Game()
+
     def move(x, moveOne, moveTwo):
         x.board[x.possibleRow[int(moveOne[0])]][x.possibleCol[moveOne[1]]].move(int(moveTwo[0]), moveTwo[1])
     king = myGame.board[7][4]
