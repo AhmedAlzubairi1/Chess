@@ -3,10 +3,10 @@
 [![Build Status](https://travis-ci.org/AhmedAlzubairi1/Chess.svg?branch=master)](https://travis-ci.org/AhmedAlzubairi1/Chess)
 [![codecov](https://codecov.io/gh/AhmedAlzubairi1/Chess/branch/master/graph/badge.svg?token=37GQ0IOMUG)](https://codecov.io/gh/AhmedAlzubairi1/Chess)
 [![Docs](https://img.shields.io/readthedocs/chess.svg)](https://chess1.readthedocs.io)
-# Personal Website:
+Personal Website:
 https://ahmedalzubairi1.github.io/ahmedalzubairi.github.io/
 
-COMS4995 Project -> Chess Backend
+# COMS4995 Project -> Chess Backend
 
 
 This is repo for a chess backend that you can use for your chess game. All you need to do is to handle the front end. Everything else such as the rules of the game and movement is already handled by the backend. 
