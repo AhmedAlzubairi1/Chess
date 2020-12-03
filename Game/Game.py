@@ -58,7 +58,13 @@ class Game():
                 self.checkBoard[c][r].append(piece)
 
     def isCheckMate(self, playerOne):
-        # Check if player is checkmated
+        """ Tests if current Player is in check mate
+
+        :param playerOne: Boolean representing if it is player one's turn. False if it is player two's turn
+        :type playerOne: bool
+        :return: Returns a boolean noting if player is in check mate
+        :rtype: bool
+        """
         if playerOne:
             kingRow = self.playerOneKing.possibleCol[self.playerOneKing.col]
             kingCol = self.playerOneKing.row - 1
@@ -91,7 +97,13 @@ class Game():
             return status
 
     def isCheck(self, playerOne):
-        # Check if player is checked
+        """ Tests if current Player is in check
+
+        :param playerOne: Boolean representing if it is player one's turn. False if it is player two's turn
+        :type playerOne: bool
+        :return: Returns a boolean noting if player is in check
+        :rtype: bool
+        """
         kingCol, kingRow = 0, 0
         if playerOne:
             kingRow = self.playerOneKing.possibleCol[self.playerOneKing.col]
