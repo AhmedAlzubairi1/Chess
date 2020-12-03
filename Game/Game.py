@@ -44,7 +44,6 @@ class Game():
     def updateCheckBoard(self, playerOne):
         """ This updated the checkBoard with PlayerTwo checks on PlayerOne if the
             playerOne paramter is true, and opposite if false
-
         :param playerOne: Boolean representing if it is playerOne's check
         :type playerOne: bool
         """
@@ -54,10 +53,6 @@ class Game():
         playerPieces = self.playerTwoPieces if playerOne \
             else self.playerOnePieces
         for piece in playerPieces:
-            # Here piece is the objects
-            # print(piece)
-            # print(piece.possibleCapturesCheck())
-            # raise Exception
             for capture in piece.possibleCapturesCheck():
                 c, r = capture
                 self.checkBoard[c][r].append(piece)
@@ -65,8 +60,6 @@ class Game():
     def isCheckMate(self, playerOne):
         # Check if player is checkmated
         if playerOne:
-            # For some reason doing a flip of row and col for checkMate and
-            # works
             kingRow = self.playerOneKing.possibleCol[self.playerOneKing.col]
             kingCol = self.playerOneKing.row - 1
             status = True
@@ -92,7 +85,6 @@ class Game():
                     self.checkBoard[kingCol][kingRow]) == 0:
                 return False
             # Now check if the king can still move, if it can, player isnt on
-            # checkmate
             for c, r in self.playerTwoKing.availableMoves():
                 if len(self.checkBoard[c][r]) == 0:
                     status = False
@@ -117,8 +109,6 @@ class Game():
         """This populates the playerOnePieces (black) empty set with the player one's
             pieces.It also adds those pieces to the board
         """
-        # add pawns
-        # (self,self.board,color,group,row,col)
         color = "BLACK"
         group = self.playerOnePieces
         self.playerOneKing = King(self.board, color, group, 1, 'E', self)
@@ -243,7 +233,6 @@ class Game():
                 if self.board[7][5] is None and self.board[7][6] is None and self.board[7][
                         7] is not None and self.board[7][7].name == 'Rook' and self.board[7][7].color == 'WHITE':
                     # this means I can do castle
-                    # print('AM CASTLING ******************')
                     self.board[7][6] = self.playerTwoKing
                     self.board[self.playerTwoKing.row -
                                1][self.possibleCol[self.playerTwoKing.col]] = None
@@ -326,9 +315,6 @@ class Game():
                 else:
                     print('Player two lost, checkmate')
                 break
-            # I am reseting the passant set because the opposing player can
-            # only take the passant piece on the first move it is possible to
-            # capture it only
             if self.playerOneTurn:
                 print(
                     f'Player One turn \n Note: player TWO passant are {self.playerTwoPassantPawns}')
@@ -370,15 +356,6 @@ class Game():
         """ Given a 2d list representing the self.board w/ pieces. This function returns a user friendly string
             depicting the board. The board is already provided because it is a member variable.
         """
-        '''
-        count=1
-        for row in self.board:
-            print(f'{count}-{row}')
-            count+=1
-        temp=[chr(ord('A')+i) for i in range(8)]
-        return temp
-        '''
-
         tempBoard = [[k for k in i] for i in self.checkBoard]
         # Add column labeling
         columnLetters = [chr(ord('A') + i) for i in range(8)]
