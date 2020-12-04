@@ -338,14 +338,14 @@ class Game():
                     print('Player two in check')
 
             print(self.__repr__())
-            x = input().split()
+            x = input().upper().split()
             moveOne = x[0]
-            moveTwo = x[1] if moveOne.lower(
-            ) == 'king-side' or moveOne.lower() == 'queen-side' else x[2]
+            moveTwo = x[1] if moveOne.upper(
+            ) == 'KING-SIDE' or moveOne.upper() == 'QUEEN-SIDE' else x[2]
             try:
-                if moveOne.lower() == 'king-side':
+                if moveOne.upper() == 'KING-SIDE':
                     self.attemptKingCastle(self.playerOneTurn)
-                elif moveOne.lower() == 'queen-side':
+                elif moveOne.upper() == 'QUEEN-SIDE':
                     self.attemptQueenCastle(self.playerOneTurn)
                 elif self.isCheck(self.playerOneTurn):
                     print('Make a move to move away from Check')
@@ -355,7 +355,7 @@ class Game():
                     self.board[self.possibleRow[int(moveOne[0])]][self.possibleCol[moveOne[1]]].move(
                         int(moveTwo[0]), moveTwo[1])
                 self.playerOneTurn = not self.playerOneTurn
-                print('\n' * 4)
+                print('\n' * 2)
             except Exception as identifier:
                 print(identifier)
 
