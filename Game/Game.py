@@ -42,8 +42,7 @@ class Game():
                 self.checkBoard[i][k] = []
 
     def updateCheckBoard(self, playerOne):
-        """ This updated the checkBoard with PlayerTwo checks on PlayerOne if the
-            playerOne paramter is true, and opposite if false
+        """ This updated the checkBoard with PlayerTwo checks on PlayerOne if the playerOne paramter is true, and opposite if false
         :param playerOne: Boolean representing if it is playerOne's check
         :type playerOne: bool
         """

@@ -1,13 +1,28 @@
 Game package
 ============
 
+Subpackages
+-----------
+
+.. toctree::
+
+    Game.Pieces
+
 Submodules
 ----------
 
-Game\.terminalGame module
--------------------------
+Game\.Game module
+-----------------
 
-.. automodule:: Game.terminalGame
+.. automodule:: Game.Game
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Game\.gameRunner module
+-----------------------
+
+.. automodule:: Game.gameRunner
     :members:
     :undoc-members:
     :show-inheritance:

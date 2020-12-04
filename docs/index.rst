@@ -1,5 +1,5 @@
 .. Chess documentation master file, created by
-   sphinx-quickstart on Thu Nov  5 22:42:09 2020.
+   sphinx-quickstart on Thu Dec  3 21:53:07 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
