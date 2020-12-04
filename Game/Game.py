@@ -327,12 +327,8 @@ class Game():
                     print('Player two lost, checkmate')
                 break
             if self.playerOneTurn:
-                print(
-                    f'Player One turn \n Note: player TWO passant are {self.playerTwoPassantPawns}')
                 self.playerOnePassantPawns = set()
             else:
-                print(
-                    f' Player two Turn \n Note: player one passant are {self.playerOnePassantPawns}')
                 self.playerTwoPassantPawns = set()
 
             if self.isCheck(self.playerOneTurn):
