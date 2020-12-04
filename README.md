@@ -36,6 +36,10 @@ python gameRunner.py
 - Checks
 - Check Mates
 
+## Documentation
+- [Read the Docs](https://chess1.readthedocs.io/en/latest/) is where you will find a detailed explanation of what each method/function does
+
+
 When playing the game. This is how you move a piece:
 If you want to move a piece at 1A to 3B, just type : 1A to 3B
 The game would shift between players so that each player gets a turn until someone wins. 
