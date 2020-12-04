@@ -40,19 +40,12 @@ python gameRunner.py
 - [Read the Docs](https://chess1.readthedocs.io/en/latest/) is where you will find a detailed explanation of what each method/function does
 
 
-When playing the game. This is how you move a piece:
-If you want to move a piece at 1A to 3B, just type : 1A to 3B
-The game would shift between players so that each player gets a turn until someone wins. 
+
+## How to Use Code for Your Chess Front End
+
+asds
 
 
-When creating your frontend, you would need to copy the logic in the terminalGame.py file. Specifically you need to use the initGame, function to start the game. THen you can use whatever frontend you want to make the chess game.
 
-To run the game on the terminal front end, go to the Game directory and run the python script gameRunner.py as such:
 
-```
-cd Game
-python gameRunner.py
-```
-Follow the instructions to move pieces. First to get a check mate wins.
-To demo The chess engine on the front end w/ terminal interface:
-![](demo.gif)
+
